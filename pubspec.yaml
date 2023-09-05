@@ -10,32 +10,48 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
+  dartz: ^0.10.1
+  flutter_bloc: ^8.1.2
+  flutter_screenutil: ^5.6.1
+  get_it: ^7.2.0
+  equatable: ^2.0.5
+  flutter_svg: ^2.0.2
+  jwt_decode: ^0.3.1
+  auto_size_text: ^3.0.0
+  fluttertoast: ^8.2.2
+  dio: ^4.0.6
+  pretty_dio_logger: ^1.2.0-beta-1
+  flutter_spinkit: ^5.2.0
+  webview_flutter: ^4.2.2
+  webview_flutter_wkwebview: ^3.7.2
+  webview_flutter_android: ^3.9.2
+  mask_text_input_formatter: ^2.5.0
+  crypto: ^3.0.3
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0
-network:
-  path: packages/network
-core:
-  path: packages/core
-localization:
-  path: packages/localization
-domain_models:
-  path: packages/domain_models
-payment_methods:
-  path: packages/features/payment_methods
-card_payment:
-  path: packages/features/card_payment
-fawry_payment:
-  path: packages/features/fawry_payment
-ui_components:
-  path: packages/ui_components
-routers:
-  path: packages/routers
-payment_domain:
-  path: packages/payment_domain
+#network:
+#  path: packages/network
+#core:
+#  path: packages/core
+#localization:
+#  path: packages/localization
+#domain_models:
+#  path: packages/domain_models
+#payment_methods:
+#  path: packages/features/payment_methods
+#card_payment:
+#  path: packages/features/card_payment
+#fawry_payment:
+#  path: packages/features/fawry_payment
+#ui_components:
+#  path: packages/ui_components
+#routers:
+#  path: packages/routers
+#payment_domain:
+#  path: packages/payment_domain
 
 
 flutter:

@@ -1,12 +1,15 @@
-import 'package:core/core.dart';
-import 'package:core/packages/screen_util/screen_util.dart';
+
 import 'package:cowpay/cowpay.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:localization/localization.dart';
-import 'package:network/network.dart';
-import 'package:routers/routers.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+
+import '../core/core.dart';
+import '../localization/localization.dart';
+import '../localization/src/enum.dart';
+import '../network/network.dart';
+import '../routers/routers.dart';
 import 'di/injection_container.dart';
 
 class Cowpay extends StatefulWidget {
