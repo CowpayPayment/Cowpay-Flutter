@@ -1,0 +1,1 @@
+enum CowpayEnvironment { production, staging }

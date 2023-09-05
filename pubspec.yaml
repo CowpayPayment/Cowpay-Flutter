@@ -1,0 +1,61 @@
+name: cowpay
+description: Cowpay is a payment gateway plugin.
+version: 0.0.1
+homepage: https://cowpay.me/
+
+environment:
+  sdk: '>=3.0.6 <4.0.0'
+  flutter: ">=3.3.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  network:
+    path: packages/network
+  core:
+    path: packages/core
+  localization:
+    path: packages/localization
+  domain_models:
+    path: packages/domain_models
+  payment_methods:
+    path: packages/features/payment_methods
+  card_payment:
+    path: packages/features/card_payment
+  fawry_payment:
+    path: packages/features/fawry_payment
+  ui_components:
+    path: packages/ui_components
+  routers:
+    path: packages/routers
+  payment_domain:
+    path: packages/payment_domain
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+
+
+flutter:
+
+
+  assets:
+    - resources/images/
+    - resources/fonts/
+    - resources/images/icons/
+
+
+  fonts:
+    - family: Poppins
+      fonts:
+        - asset: resources/fonts/Poppins-Regular.ttf
+          weight: 400
+        - asset: resources/fonts/Poppins-Medium.ttf
+          weight: 500
+        - asset: resources/fonts/Poppins-SemiBold.ttf
+          weight: 600
+        - asset: resources/fonts/Poppins-Bold.ttf
+          weight: 700
+

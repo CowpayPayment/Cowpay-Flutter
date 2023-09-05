@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="14" height="15.077" viewBox="0 0 14 15.077">
+  <g id="calendar_icon" transform="translate(-4 -2.65)">
+    <rect id="Rectangle_13" data-name="Rectangle 13" width="2" height="2" rx="1" transform="translate(6 2.65)" fill="#5f338b"/>
+    <rect id="Rectangle_14" data-name="Rectangle 14" width="2" height="2" rx="1" transform="translate(14 2.65)" fill="#5f338b"/>
+    <path id="Path_17" data-name="Path 17" d="M4,18v8.05a1.4,1.4,0,0,0,1.4,1.4H16.6a1.4,1.4,0,0,0,1.4-1.4V18Zm4.2,7a.7.7,0,0,1-.7.7H6.8a.7.7,0,0,1-.7-.7v-.7a.7.7,0,0,1,.7-.7h.7a.7.7,0,0,1,.7.7Zm0-3.85a.7.7,0,0,1-.7.7H6.8a.7.7,0,0,1-.7-.7v-.7a.7.7,0,0,1,.7-.7h.7a.7.7,0,0,1,.7.7ZM12.05,25a.7.7,0,0,1-.7.7h-.7a.7.7,0,0,1-.7-.7v-.7a.7.7,0,0,1,.7-.7h.7a.7.7,0,0,1,.7.7Zm0-3.85a.7.7,0,0,1-.7.7h-.7a.7.7,0,0,1-.7-.7v-.7a.7.7,0,0,1,.7-.7h.7a.7.7,0,0,1,.7.7ZM15.9,25a.7.7,0,0,1-.7.7h-.7a.7.7,0,0,1-.7-.7v-.7a.7.7,0,0,1,.7-.7h.7a.7.7,0,0,1,.7.7Zm0-3.85a.7.7,0,0,1-.7.7h-.7a.7.7,0,0,1-.7-.7v-.7a.7.7,0,0,1,.7-.7h.7a.7.7,0,0,1,.7.7Z" transform="translate(0 -9.723)" fill="#5f338b"/>
+    <path id="Path_18" data-name="Path 18" d="M18,9.5V7.4A1.4,1.4,0,0,0,16.6,6h-.35v.35a1.4,1.4,0,1,1-2.8,0V6H8.55v.35a1.4,1.4,0,1,1-2.8,0V6H5.4A1.4,1.4,0,0,0,4,7.4V9.5Z" transform="translate(0 -1.923)" fill="#5f338b"/>
+  </g>
+</svg>
