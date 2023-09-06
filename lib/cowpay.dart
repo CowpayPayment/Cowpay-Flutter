@@ -4,3 +4,4 @@
 export 'domain_models/domain_models.dart';
 export 'scr/cowpay.dart';
 export 'localization/localization.dart';
+export 'localization/src/enum.dart';
