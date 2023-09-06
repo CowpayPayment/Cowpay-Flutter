@@ -1,12 +1,9 @@
-
 import 'package:cowpay/cowpay.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-
 import '../core/core.dart';
-import '../localization/localization.dart';
 import '../localization/src/enum.dart';
 import '../network/network.dart';
 import '../routers/routers.dart';
@@ -28,7 +25,7 @@ class Cowpay extends StatefulWidget {
     required this.merchantCode,
     required this.merchantHashCode,
     required this.merchantMobile,
-    required this.isfeesOnCustomer,
+    required this.isFeesOnCustomer,
     this.logoStringUrl,
     this.height,
     this.buttonColor,
@@ -49,7 +46,7 @@ class Cowpay extends StatefulWidget {
   //Payment Data
   final String description, merchantReferenceId;
   final num amount;
-  final bool isfeesOnCustomer;
+  final bool isFeesOnCustomer;
   //Customer Data
   final String customerEmail,
       customerFirstName,
@@ -107,7 +104,7 @@ class _CowpayState extends State<Cowpay> {
       customerLastName: widget.customerLastName,
       customerMobile: widget.customerMobile,
       customerMerchantProfileId: widget.customerMerchantProfileId,
-      isfeesOnCustomer: widget.isfeesOnCustomer,
+      isfeesOnCustomer: widget.isFeesOnCustomer,
       logoStringUrl: widget.logoStringUrl,
     );
 

@@ -1,10 +1,9 @@
-import 'package:cowpay/localization/localization.dart';
+import 'package:cowpay/cowpay.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../../core/core.dart';
-import '../../../../../../domain_models/domain_models.dart';
 import '../../../../../../failures/failures.dart';
 import '../../../../../../ui_components/ui_components.dart';
 import '../../../../payment_methods.dart';

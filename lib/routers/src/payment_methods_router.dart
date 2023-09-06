@@ -8,7 +8,7 @@ class PaymentMethodsRouter {
   static Route? onGenerateRoute(RouteSettings routeSettings) {
     switch (routeSettings.name) {
       case PaymentMethodsScreen.id:
-        return MaterialPageRoute(builder: (_) => PaymentMethodsScreen());
+        return MaterialPageRoute(builder: (_) => const PaymentMethodsScreen());
 
       default:
         return null;

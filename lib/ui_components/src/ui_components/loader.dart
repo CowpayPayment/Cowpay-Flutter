@@ -24,7 +24,7 @@ class Loader {
   void dismiss() {
     if (_isShowing) {
       try {
-        WidgetsBinding.instance?.addPostFrameCallback((_) {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
           _isShowing = false;
           if (Navigator.of(_dismissingContext).canPop()) {
             Navigator.of(_dismissingContext).pop();
@@ -90,7 +90,7 @@ class LoadingImage extends StatelessWidget {
     return Center(
         child: BackdropFilter(
       filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
-      child: SpinKitFadingCircle(color: AppColors.primary),
+      child: const SpinKitFadingCircle(color: AppColors.primary),
     ) // mockApp
         // ? const Text('loading')
         // : const SpinKitFadingCircle(color: AppColors.white),

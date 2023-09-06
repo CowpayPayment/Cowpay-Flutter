@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:cowpay/cowpay.dart';
+import 'package:cowpay/localization/src/enum.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
@@ -24,7 +25,7 @@ class CowpayExample extends StatelessWidget {
       customerMobile: customerMobile,
       customerLastName: customerName,
       customerFirstName: customerName,
-      isfeesOnCustomer: isFeesOnCustomer,
+      isFeesOnCustomer: isFeesOnCustomer,
       logoStringUrl: '',
       merchantMobile: 'merchantMobile',
       description: description,

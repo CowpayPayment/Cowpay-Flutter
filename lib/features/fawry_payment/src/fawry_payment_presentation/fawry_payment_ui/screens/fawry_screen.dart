@@ -1,16 +1,15 @@
-import 'package:cowpay/localization/localization.dart';
+import 'package:cowpay/cowpay.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+
 import '../../../../../../core/core.dart';
-import '../../../../../../domain_models/domain_models.dart';
 import '../../../../../../failures/failures.dart';
 import '../../../../../../ui_components/src/ui_components/back_button_view.dart';
 import '../../../../../../ui_components/ui_components.dart';
 import '../../../../fawry_payment.dart';
-
 import '../../fawry_payment_blocs/fawry_bloc/fawry_bloc.dart';
 import '../widgets/fawry_widget.dart';
 

@@ -45,7 +45,7 @@ class PayResponseModel {
     tokenId = json['tokenId'];
     redirectUrl = json['redirectUrl'];
     redirectParams = json['redirectParams'] != null
-        ? new RedirectParams.fromJson(json['redirectParams'])
+        ? RedirectParams.fromJson(json['redirectParams'])
         : null;
     redirectMethod = RedirectMethodExtension.parse(json['redirectMethod']);
     status = StatusExtension.parse(json['status']);
@@ -65,28 +65,28 @@ class PayResponseModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['recurringToken'] = this.recurringToken;
-    data['tokenId'] = this.tokenId;
-    data['redirectUrl'] = this.redirectUrl;
-    if (this.redirectParams != null) {
-      data['redirectParams'] = this.redirectParams!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['recurringToken'] = recurringToken;
+    data['tokenId'] = tokenId;
+    data['redirectUrl'] = redirectUrl;
+    if (redirectParams != null) {
+      data['redirectParams'] = redirectParams!.toJson();
     }
-    data['redirectMethod'] = this.redirectMethod;
-    data['threeDSUrl'] = this.threeDSUrl;
-    data['paymentGatewayReferenceId'] = this.paymentGatewayReferenceId;
-    data['merchantReferenceId'] = this.merchantReferenceId;
-    data['customerReferenceId'] = this.customerReferenceId;
-    data['merchantCode'] = this.merchantCode;
-    data['cowpayReferenceId'] = this.cowpayReferenceId;
-    data['amount'] = this.amount;
-    data['merchantAmount'] = this.merchantAmount;
-    data['feesAmount'] = this.feesAmount;
-    data['vatAmount'] = this.vatAmount;
-    data['status'] = this.status;
-    data['paymentMethod'] = this.paymentMethod;
-    data['statusId'] = this.statusId;
-    data['reason'] = this.reason;
+    data['redirectMethod'] = redirectMethod;
+    data['threeDSUrl'] = threeDSUrl;
+    data['paymentGatewayReferenceId'] = paymentGatewayReferenceId;
+    data['merchantReferenceId'] = merchantReferenceId;
+    data['customerReferenceId'] = customerReferenceId;
+    data['merchantCode'] = merchantCode;
+    data['cowpayReferenceId'] = cowpayReferenceId;
+    data['amount'] = amount;
+    data['merchantAmount'] = merchantAmount;
+    data['feesAmount'] = feesAmount;
+    data['vatAmount'] = vatAmount;
+    data['status'] = status;
+    data['paymentMethod'] = paymentMethod;
+    data['statusId'] = statusId;
+    data['reason'] = reason;
     return data;
   }
 }
@@ -109,12 +109,12 @@ class RedirectParams {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['paReq'] = this.paReq;
-    data['redirect'] = this.redirect;
-    data['termUrl'] = this.termUrl;
-    data['md'] = this.md;
-    data['body'] = this.body;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['paReq'] = paReq;
+    data['redirect'] = redirect;
+    data['termUrl'] = termUrl;
+    data['md'] = md;
+    data['body'] = body;
     return data;
   }
 }
@@ -153,6 +153,7 @@ extension StatusExtension on RedirectStatus {
       case "PartiallyRefunded":
         return RedirectStatus.partiallyRefunded;
     }
+    return null;
   }
 }
 
@@ -166,5 +167,6 @@ extension RedirectMethodExtension on RedirectMethod {
       case "GET":
         return RedirectMethod.get;
     }
+    return null;
   }
 }

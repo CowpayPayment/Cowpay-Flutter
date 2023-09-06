@@ -1,12 +1,10 @@
-
-import 'package:cowpay/localization/localization.dart';
+import 'package:cowpay/cowpay.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../core/core.dart';
 import '../../ui_components.dart';
-
 
 class BackButtonView extends StatelessWidget {
   final Function? onTap;

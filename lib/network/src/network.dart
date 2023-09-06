@@ -55,7 +55,7 @@ class NetworkUtilImpl implements Network {
       try {
         return responseFromMap(response.data!);
       } catch (e) {
-        throw ParsingException();
+        throw const ParsingException();
       }
     } on DioError catch (error) {
       if (error.type == DioErrorType.response) {

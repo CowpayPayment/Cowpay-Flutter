@@ -1,11 +1,9 @@
-
 import 'package:dartz/dartz.dart';
 
 import '../../../../core/core.dart';
 import '../../../../domain_models/domain_models.dart';
 import '../../../../failures/failures.dart';
 import '../../../payment_domain.dart';
-import '../../payment_data/payment_models/card_data.dart';
 import '../payment_repositories/payment_repository.dart';
 
 export '../../payment_data/payment_models/card_data.dart';

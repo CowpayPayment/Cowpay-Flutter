@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../ui_components.dart';
-import 'app_colors.dart';
 
 class AppDecorations {
   static InputDecoration inputTextDecoration({
@@ -19,8 +18,8 @@ class AppDecorations {
     double? focusedBorderThickness,
     Color? enabledBorderColor,
     double? enabledBorderThickness,
-    Color? erroBorderColor,
-    double? erroBorderThickness,
+    Color? errorBorderColor,
+    double? errorBorderThickness,
   }) =>
       InputDecoration(
         counterText: "",
@@ -56,8 +55,8 @@ class AppDecorations {
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10.0.sp),
           borderSide: BorderSide(
-            width: erroBorderThickness ?? 2.sp,
-            color: erroBorderColor ?? AppColors.errorColor,
+            width: errorBorderThickness ?? 2.sp,
+            color: errorBorderColor ?? AppColors.errorColor,
           ),
         ),
         errorStyle:
@@ -65,8 +64,8 @@ class AppDecorations {
         focusedErrorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10.0.sp),
           borderSide: BorderSide(
-            width: erroBorderThickness ?? 2.sp,
-            color: erroBorderColor ?? AppColors.errorColor,
+            width: errorBorderThickness ?? 2.sp,
+            color: errorBorderColor ?? AppColors.errorColor,
           ),
         ),
         // errorStyle: AppTextsStyles.appTextFieldErrorStyle,
@@ -85,8 +84,6 @@ class AppDecorations {
       begin: Alignment(0.5, 0),
       end: Alignment(0.5, 1),
       colors: [
-        // AppColors.orangeyRed.withOpacity(0.12),
-        // AppColors.goldenrod.withOpacity(0.087),
         Color.fromRGBO(254, 243, 239, 1.0),
         Color.fromRGBO(255, 249, 237, 1),
       ],

@@ -37,7 +37,7 @@ class AppBarView extends StatelessWidget {
               ),
             ),
             SafeArea(
-              child: Container(
+              child: SizedBox(
                 height: 0.08.sh,
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 0.02.sw),

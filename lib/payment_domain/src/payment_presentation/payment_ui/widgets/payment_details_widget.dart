@@ -1,4 +1,4 @@
-import 'package:cowpay/localization/localization.dart';
+import 'package:cowpay/cowpay.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

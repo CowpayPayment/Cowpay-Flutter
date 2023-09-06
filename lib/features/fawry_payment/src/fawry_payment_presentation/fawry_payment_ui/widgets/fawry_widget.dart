@@ -1,5 +1,4 @@
-
-import 'package:cowpay/localization/localization.dart';
+import 'package:cowpay/cowpay.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -41,8 +40,8 @@ class FawryWidget extends StatelessWidget {
                   onChange: (value) {
                     context.read<FawryBloc>().add(MobileNumberChanged(value));
                   },
-                  validator: (string) => state.mobileNumber?.value
-                      .fold((l) => context.localization(l.message!), (r) => null),
+                  validator: (string) => state.mobileNumber?.value.fold(
+                      (l) => context.localization(l.message!), (r) => null),
                 );
               }),
           SizedBox(
@@ -61,7 +60,8 @@ class FawryWidget extends StatelessWidget {
           SizedBox(height: 0.2.sh),
           BlocBuilder<FawryBloc, FawryState>(
             buildWhen: (previous, current) =>
-                previous.submitButtonIsLoading != current.submitButtonIsLoading ||
+                previous.submitButtonIsLoading !=
+                    current.submitButtonIsLoading ||
                 previous.mobileNumber != current.mobileNumber,
             builder: (context, state) {
               if (state.submitButtonIsLoading) {

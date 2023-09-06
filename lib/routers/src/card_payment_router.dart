@@ -9,7 +9,7 @@ class CardPaymentRouter {
   static Route? onGenerateRoute(RouteSettings routeSettings) {
     switch (routeSettings.name) {
       case AddCardScreen.id:
-        return MaterialPageRoute(builder: (_) => AddCardScreen());
+        return MaterialPageRoute(builder: (_) => const AddCardScreen());
       case PaymentWebViewScreen.id:
         final PayResponseModel payResponseModel =
             routeSettings.arguments == null

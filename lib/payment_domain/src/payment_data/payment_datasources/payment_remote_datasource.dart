@@ -1,8 +1,6 @@
-
 import '../../../../domain_models/domain_models.dart';
 import '../../../../network/network.dart';
 import '../../../payment_domain.dart';
-import '../payment_models/get_payment_fees_call/get_payment_fees_call_request.dart';
 
 abstract class PaymentRemoteDataSource {
   Future<CowpayResponseModel<FeesModel>> getFeesCall(

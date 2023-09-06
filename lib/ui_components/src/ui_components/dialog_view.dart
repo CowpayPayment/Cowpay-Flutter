@@ -5,9 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../src/enums.dart';
 import '../../ui_components.dart';
-import 'button_view.dart';
 
 class DialogView extends StatelessWidget {
   final String? content, secondButtonText, mainButtonText;

@@ -6,4 +6,3 @@ export 'src/enums/payment_methods_enum.dart';
 export 'src/error_model.dart';
 export 'src/fawry_models/fawry_success_model.dart';
 export 'src/success_model.dart';
-export 'src/enums/payment_methods_enum.dart';

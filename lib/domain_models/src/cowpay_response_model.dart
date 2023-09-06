@@ -22,7 +22,7 @@ class CowpayResponseModel<T> {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['statusCode'] = this.statusCode;
     data['operationStatus'] = this.operationStatus;
     data['operationMessage'] = this.operationMessage;

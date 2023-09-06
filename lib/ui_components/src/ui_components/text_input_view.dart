@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -131,8 +130,8 @@ class AppTextField extends StatelessWidget {
                 focusedBorderThickness: focusedBorderThickness,
                 enabledBorderColor: AppColors.primary.withOpacity(0.3),
                 enabledBorderThickness: enabledBorderThickness,
-                erroBorderColor: AppColors.errorColor,
-                erroBorderThickness: errorBorderThickness,
+                errorBorderColor: AppColors.errorColor,
+                errorBorderThickness: errorBorderThickness,
               ),
               cursorColor: AppColors.primary,
               textInputAction: textInputAction ?? TextInputAction.next,

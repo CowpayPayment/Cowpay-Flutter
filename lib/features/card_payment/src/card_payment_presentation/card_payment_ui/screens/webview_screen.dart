@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
 
-
 import 'package:cowpay/cowpay.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -21,6 +20,7 @@ class PaymentWebViewScreen extends StatelessWidget {
   static const id = '/PaymentWebViewScreen';
   const PaymentWebViewScreen({super.key, required this.payResponseModel});
 
+  @override
   Widget build(BuildContext context) {
     return BlocProvider<PaymentWebViewBloc>(
       create: (context) => PaymentWebViewBloc(),
@@ -203,7 +203,7 @@ class _PaymentWebViewWidgetState extends State<PaymentWebViewWidget> {
   }
 
   void _successDialog(
-      BuildContext _context, CowpayJSChannelMessage payLoadModel) {
+      BuildContext context, CowpayJSChannelMessage payLoadModel) {
     DialogView.showBottomSheet(
         context: context,
         isDismissible: false,
@@ -227,7 +227,7 @@ class _PaymentWebViewWidgetState extends State<PaymentWebViewWidget> {
         });
   }
 
-  void _errorDialog(BuildContext _context, String failureMessage) {
+  void _errorDialog(BuildContext context, String failureMessage) {
     DialogView.showBottomSheet(
         context: context,
         isDismissible: false,

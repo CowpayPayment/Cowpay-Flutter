@@ -1,5 +1,3 @@
-
-
 import 'package:get_it/get_it.dart';
 
 import '../network.dart';
@@ -13,7 +11,7 @@ class NetworkDI {
 
   void call() {
     if (!di.isRegistered<Network>()) {
-      di..registerLazySingleton<Network>(() => NetworkUtilImpl())
+      di.registerLazySingleton<Network>(() => NetworkUtilImpl())
           // ..registerLazySingleton(() => NetworkService(di()))
           ;
     }
