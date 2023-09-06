@@ -16,7 +16,7 @@ dependencies:
   cowpay:
     git:
       url: https://github.com/LuminSoft/cowpay-flutter-plugin.git
-      ref: v1.0.1
+      ref: latest release version
 ```
 
 
