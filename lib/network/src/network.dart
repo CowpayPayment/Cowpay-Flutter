@@ -21,6 +21,7 @@ class NetworkUtilImpl implements Network {
     _dio.interceptors
         .add(PrettyDioLogger(requestHeader: true, requestBody: true));
   }
+
   final StatusChecker _statusChecker = StatusChecker();
   final Dio _dio = Dio();
 
@@ -57,8 +58,8 @@ class NetworkUtilImpl implements Network {
       } catch (e) {
         throw const ParsingException();
       }
-    } on DioError catch (error) {
-      if (error.type == DioErrorType.response) {
+    } on DioException catch (error) {
+      if (error.type == DioExceptionType.badResponse) {
         if (error.response?.statusCode != null &&
             _statusChecker(error.response!.statusCode) == HTTPCodes.error) {
           debugPrint((error.response?.statusCode != null &&
@@ -87,17 +88,21 @@ class NetworkUtilImpl implements Network {
       }
 
       switch (error.type) {
-        case DioErrorType.connectTimeout:
-        case DioErrorType.sendTimeout:
-        case DioErrorType.receiveTimeout:
+        case DioExceptionType.connectionTimeout:
+        case DioExceptionType.sendTimeout:
+        case DioExceptionType.receiveTimeout:
+        case DioExceptionType.connectionError:
           throw const ConnectionException();
-        case DioErrorType.cancel:
+        case DioExceptionType.cancel:
           throw const RequestCanceledException();
-        case DioErrorType.response:
-        case DioErrorType.other:
+        case DioExceptionType.badResponse:
+        case DioExceptionType.badCertificate:
+        case DioExceptionType.unknown:
           {
-            if (error.message.contains('SocketException')) {
-              throw const ConnectionException();
+            if (error.message != null) {
+              if (error.message!.contains('SocketException')) {
+                throw const ConnectionException();
+              }
             }
             throw const UnExpectedException();
           }

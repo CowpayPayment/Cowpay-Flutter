@@ -69,9 +69,9 @@ mixin Request implements BaseRequest {
 
   bool get isEncoded => false;
 
-  int? get sendTimeout => null;
+  Duration? get sendTimeout => null;
 
-  int? get receiveTimeout => null;
+  Duration? get receiveTimeout => null;
 
   Map<String, String>? get headers {
     final headers = <String, String>{};
