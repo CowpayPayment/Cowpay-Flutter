@@ -92,3 +92,5 @@ extension PaymentOptionsExtension on PaymentOptions {
     }
   }
 }
+
+List<int> availableMethods = [1, 2];

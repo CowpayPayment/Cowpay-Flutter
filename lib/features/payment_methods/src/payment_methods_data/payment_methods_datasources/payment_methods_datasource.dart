@@ -1,4 +1,3 @@
-
 import 'package:cowpay/features/payment_methods/src/payment_methods_data/payment_methods_models/get_token_request_call/get_token_request.dart';
 
 import '../../../../../domain_models/domain_models.dart';
@@ -7,7 +6,7 @@ import '../payment_methods_models/get_payment_methods_request_call/get_payment_m
 import '../payment_methods_models/get_token_request_call/get_token_request_model.dart';
 
 abstract class PaymentMethodsRemoteDataSource {
-  Future</*CowpayResponseModel<*/String/*>*/> getTokenCall(
+  Future< /*CowpayResponseModel<*/ String /*>*/ > getTokenCall(
       {required GetTokenRequestModel requestModel});
 
   Future<CowpayResponseModel<List<PaymentOptions>>> getPaymentMethods(
@@ -21,14 +20,14 @@ class PaymentMethodsRemoteDataSourceImpl
   PaymentMethodsRemoteDataSourceImpl({required this.network});
 
   @override
-  Future</*CowpayResponseModel<*/String/*>*/> getTokenCall(
+  Future< /*CowpayResponseModel<*/ String /*>*/ > getTokenCall(
       {required GetTokenRequestModel requestModel}) async {
     return await network.send(
         request: GetTokenRequest(requestModel),
         responseFromMap: (map) => /*map['data'],*/
             // CowpayResponseModel.fromJson(map, (json) {
-              /*return */map);
-            // }));
+            /*return */ map);
+    // }));
   }
 
   @override
@@ -38,8 +37,10 @@ class PaymentMethodsRemoteDataSourceImpl
       request: GetPaymentMethodsRequest(requestModel),
       responseFromMap: (map) => CowpayResponseModel.fromJson(map, (list) {
         List<int> methodsList = list.cast<int>();
-        List<PaymentOptions> paymentOptionsList =
-            methodsList.map((i) => PaymentOptionsExtension.parse(i)).toList();
+        List<PaymentOptions> paymentOptionsList = methodsList
+            .where((element) => availableMethods.contains(element))
+            .map((i) => PaymentOptionsExtension.parse(i))
+            .toList();
         return paymentOptionsList;
       }),
     );

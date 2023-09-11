@@ -27,13 +27,14 @@ class CowpayExample extends StatelessWidget {
       customerFirstName: customerName,
       isFeesOnCustomer: isFeesOnCustomer,
       logoStringUrl: '',
-      merchantMobile: 'merchantMobile',
+      merchantMobile: '01272009155',
       description: description,
       customerMerchantProfileId: customerMerchantProfileId,
       merchantReferenceId: getRandString(),
       activeEnvironment: CowpayEnvironment.staging,
-      merchantHashCode: 'hashKey',
-      merchantCode: 'merchantCode',
+      merchantHashCode:
+          'c84dc25605d68dff91741fc937e30aeeb59eb1338b77074a84caaec0441aad21',
+      merchantCode: 'b3b49e9c-878d-49bb-883f-852c5005db81',
       onSuccess: (val) {
         debugPrint(val.paymentMethodName);
       },

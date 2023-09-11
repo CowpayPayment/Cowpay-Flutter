@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../../core/core.dart';
 import '../../../../../../failures/failures.dart';
+import '../../../../../../ui_components/src/ui_components/back_button_view.dart';
 import '../../../../../../ui_components/ui_components.dart';
 import '../../../../payment_methods.dart';
 import '../../payment_methods_bloc/payment_methods_bloc.dart';
@@ -19,6 +20,7 @@ class PaymentMethodsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BackgroundView(
         title: context.localization('paymentMethod'),
+        appBarStartActions: const BackButtonView(),
         contentWidget: BlocProvider<PaymentMethodsBloc>(
           create: (context) => di<PaymentMethodsBloc>()
             ..add(

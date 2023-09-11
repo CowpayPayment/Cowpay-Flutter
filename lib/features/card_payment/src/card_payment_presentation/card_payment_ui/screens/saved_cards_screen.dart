@@ -8,6 +8,7 @@ import '../../../../../../core/core.dart';
 import '../../../../../../failures/failures.dart';
 import '../../../../../../payment_domain/payment_domain.dart';
 import '../../../../../../routers/routers.dart';
+import '../../../../../../ui_components/src/ui_components/back_button_view.dart';
 import '../../../../../../ui_components/ui_components.dart';
 import '../../card_payment_blocs/saved_cards_bloc/saved_cards_bloc.dart';
 
@@ -19,6 +20,7 @@ class SavedCardsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BackgroundView(
+        appBarStartActions: const BackButtonView(),
         title: context.localization('saveCards'),
         contentWidget: BlocProvider<SavedCardsBloc>(
           create: (context) => di<SavedCardsBloc>()..add(GetSavedCards()),
