@@ -15,9 +15,9 @@ extension PaymentOptionsExtension on PaymentOptions {
     switch (this) {
       case PaymentOptions.creditCard:
       case PaymentOptions.tokenizedCreditCard:
-        return 'Credit Card';
+        return 'creditCard';
       case PaymentOptions.fawryPay:
-        return 'Fawry Pay';
+        return 'fawry';
       case PaymentOptions.fawryB2B:
         return 'Fawry B2B';
       case PaymentOptions.meezaCard:

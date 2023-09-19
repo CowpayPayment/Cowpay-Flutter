@@ -40,7 +40,8 @@ class PaymentMethodsScreen extends StatelessWidget {
                             return DialogView(
                               dialogType: DialogType.errorDialog,
                               mainButtonText: context.localization('ok'),
-                              content: state.failure?.message,
+                              content: context
+                                  .localization(state.failure!.message ?? ''),
                               // title: state.failure?.message,
                               onMainActionFunction: (ctx) {
                                 Navigator.pop(builderCtx);
@@ -58,7 +59,8 @@ class PaymentMethodsScreen extends StatelessWidget {
                             return DialogView(
                               dialogType: DialogType.errorDialog,
                               mainButtonText: context.localization('retry'),
-                              content: state.failure?.message,
+                              content: context
+                                  .localization(state.failure!.message ?? ''),
                               onMainActionFunction: (_) {
                                 Navigator.pop(builderCtx);
                                 context.read<PaymentMethodsBloc>().add(Retry());
@@ -175,7 +177,8 @@ class PaymentMethodsScreen extends StatelessWidget {
                                                           method:
                                                               selectedMethod),
                                                     );
-                                              });
+                                              },
+                                              context: context);
                                         });
                                   },
                                 ),
@@ -221,11 +224,11 @@ class PaymentMethodsScreen extends StatelessWidget {
     }
   }
 
-  Widget _buildMethodItem({
-    required PaymentOptions paymentOption,
-    bool? isSelected,
-    required Function(PaymentOptions) selectMethod,
-  }) {
+  Widget _buildMethodItem(
+      {required PaymentOptions paymentOption,
+      bool? isSelected,
+      required Function(PaymentOptions) selectMethod,
+      required BuildContext context}) {
     return InkWell(
       onTap: () {
         selectMethod(paymentOption);
@@ -256,7 +259,9 @@ class PaymentMethodsScreen extends StatelessWidget {
             ),
             Expanded(
                 child: Text(
-              paymentOption.name,
+              context.localization(
+                paymentOption.name,
+              ),
               style: TextStyles.bodyTextStyle.copyWith(
                   color: AppColors.black,
                   fontWeight: FontWeight.w500,

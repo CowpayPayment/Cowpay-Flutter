@@ -40,7 +40,8 @@ class SavedCardsScreen extends StatelessWidget {
                             return DialogView(
                               dialogType: DialogType.errorDialog,
                               mainButtonText: context.localization('exit'),
-                              content: state.failure?.message,
+                              content: context
+                                  .localization(state.failure!.message ?? ''),
                               onMainActionFunction: (ctx) {
                                 Navigator.pop(builderCtx);
                                 Navigator.of(GlobalVariables().pluginContext)
@@ -56,7 +57,8 @@ class SavedCardsScreen extends StatelessWidget {
                             return DialogView(
                               dialogType: DialogType.errorDialog,
                               mainButtonText: context.localization('retry'),
-                              content: state.failure?.message,
+                              content: context
+                                  .localization(state.failure!.message ?? ''),
                               onMainActionFunction: (_) {
                                 Navigator.pop(builderCtx);
                                 context.read<SavedCardsBloc>().add(Retry());

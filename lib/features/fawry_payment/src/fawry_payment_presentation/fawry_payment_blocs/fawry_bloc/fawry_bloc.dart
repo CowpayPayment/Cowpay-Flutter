@@ -1,4 +1,4 @@
-
+import 'package:cowpay/cowpay.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -65,7 +65,10 @@ class FawryBloc extends Bloc<FawryEvent, FawryState> {
     emitter(
       response.fold(
         (l) => state.copyWith(failure: l, screenIsLoading: false),
-        (r) => state.copyWith(feesModel: r, screenIsLoading: false),
+        (r) => state.copyWith(
+            feesModel: r,
+            screenIsLoading: false,
+            mobileNumber: MobileNumber(GlobalVariables().customerMobile)),
       ),
     );
   }

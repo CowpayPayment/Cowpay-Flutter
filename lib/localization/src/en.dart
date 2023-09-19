@@ -51,5 +51,8 @@ Map<String, String> localizationMapEn = {
   "youAreAboutToExitPayment": "You are about to exit from your payment",
   "paymentFailed": "Payment had been failed",
   "successPayment": "Payment is successfully done",
-  "referenceNumber": "Reference Number"
+  "referenceNumber": "Reference Number",
+  "creditCard": "Credit Card",
+  "fawry": "Fawry",
+  "enterYourMobileNumber":"Enter your mobile number"
 };
