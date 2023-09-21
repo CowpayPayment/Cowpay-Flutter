@@ -13,6 +13,9 @@ class CowpayExample extends StatelessWidget {
   String customerMerchantProfileId = "ExampleId2222";
   String customerName = "Testing";
   bool isFeesOnCustomer = true;
+  String merchantCode = const String.fromEnvironment("merchantCode");
+  String merchantHash = const String.fromEnvironment("hashKey");
+  String merchantMobileNumber = const String.fromEnvironment("merchantMobile");
 
   CowpayExample({super.key});
 
@@ -27,14 +30,14 @@ class CowpayExample extends StatelessWidget {
       customerFirstName: customerName,
       isFeesOnCustomer: isFeesOnCustomer,
       // logoStringUrl: '',
-      merchantMobile: '01272009155',
+      merchantMobile: merchantMobileNumber,
+
       description: description,
       customerMerchantProfileId: customerMerchantProfileId,
       merchantReferenceId: getRandString(),
       activeEnvironment: CowpayEnvironment.staging,
-      merchantHashCode:
-          'c84dc25605d68dff91741fc937e30aeeb59eb1338b77074a84caaec0441aad21',
-      merchantCode: 'b3b49e9c-878d-49bb-883f-852c5005db81',
+      merchantHashCode: merchantHash,
+      merchantCode: merchantCode,
       onSuccess: (val) {
         debugPrint(val.paymentMethodName);
       },
