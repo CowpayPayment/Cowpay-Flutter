@@ -111,7 +111,8 @@ class PaymentMethodsScreen extends StatelessWidget {
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      if (GlobalVariables().logoStringUrl != null)
+                      if (GlobalVariables().logoStringUrl != null &&
+                          (GlobalVariables().logoStringUrl ?? "").isNotEmpty)
                         _buildHeader(
                             imagePath: GlobalVariables().logoStringUrl!),
                       Expanded(
