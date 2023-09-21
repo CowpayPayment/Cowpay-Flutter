@@ -201,8 +201,8 @@ class PaymentMethodsScreen extends StatelessWidget {
                                 },
                               ),
                               SizedBox(
-                                height: 0.1.sh,
-                              )
+                                height: 0.012.sh,
+                              ),
                             ],
                           ),
                         ),

@@ -20,7 +20,8 @@ class SavedCardsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BackgroundView(
-        appBarStartActions: const BackButtonView(),
+        appBarStartActions:
+            BackButtonView(onTap: () => Navigator.of(context).pop()),
         title: context.localization('saveCards'),
         contentWidget: BlocProvider<SavedCardsBloc>(
           create: (context) => di<SavedCardsBloc>()..add(GetSavedCards()),
@@ -236,7 +237,7 @@ class SavedCardsScreen extends StatelessWidget {
                             },
                           ),
                           SizedBox(
-                            height: 0.05.sh,
+                            height: 0.012.sh,
                           ),
                         ],
                       ),
@@ -248,6 +249,8 @@ class SavedCardsScreen extends StatelessWidget {
           ),
         ));
   }
+
+  void goToBackScreen(BuildContext context) {}
 
   void showCvvPopup(BuildContext context) {
     bool validCvv = false;

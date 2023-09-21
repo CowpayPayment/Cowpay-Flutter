@@ -20,7 +20,8 @@ class FawryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BackgroundView(
-        appBarStartActions: const BackButtonView(),
+        appBarStartActions:
+            BackButtonView(onTap: () => Navigator.of(context).pop()),
         title: context.localization('paymentDetails'),
         contentWidget: BlocProvider<FawryBloc>(
           create: (context) => di<FawryBloc>()
