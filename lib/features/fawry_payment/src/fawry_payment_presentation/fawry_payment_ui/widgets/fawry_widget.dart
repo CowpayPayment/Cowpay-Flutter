@@ -83,7 +83,7 @@ class FawryWidget extends StatelessWidget {
                 }
                 return ButtonView(
                   textColor: AppColors.white,
-                  title: context.localization('pay'),
+                  title: context.localization('proceed'),
                   isEnabled: (state.isFormValid),
                   onClickFunction: (context) {
                     FocusManager.instance.primaryFocus?.unfocus();
