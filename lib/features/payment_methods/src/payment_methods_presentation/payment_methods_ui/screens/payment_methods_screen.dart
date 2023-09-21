@@ -325,7 +325,7 @@ class PaymentMethodsScreen extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          text ?? context.localization('emptyData'),
+          text ?? context.localization('noPaymentMethodsAvailable'),
           style: TextStyles.bodyTextStyle.copyWith(color: AppColors.black),
         ),
       ],
