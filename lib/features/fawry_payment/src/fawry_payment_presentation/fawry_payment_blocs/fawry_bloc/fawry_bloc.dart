@@ -34,7 +34,7 @@ class FawryBloc extends Bloc<FawryEvent, FawryState> {
         if (event is GetFeesEvent) {
           await getFees(emitter);
         } else if (event is Retry) {
-          _retry(emitter);
+          await _retry(emitter);
         } else if (event is MobileNumberChanged) {
           _mobileNumberChanged(emitter, event.value);
         } else if (event is SubmitActionTapped) {
@@ -73,9 +73,12 @@ class FawryBloc extends Bloc<FawryEvent, FawryState> {
     );
   }
 
-  void _retry(Emitter emitter) {
-    if (params.runtimeType is GetPaymentFeesUseCaseParams) {
-      _getFees(emitter, params);
+  Future<void> _retry(Emitter emitter) async {
+    emitter(state.copyWith(failure: null));
+    if (params is GetPaymentFeesUseCaseParams) {
+      await _getFees(emitter, params);
+    } else if (params is PayUseCaseParams) {
+      await _payWithFawry(emitter, params);
     }
   }
 
@@ -98,7 +101,8 @@ class FawryBloc extends Bloc<FawryEvent, FawryState> {
       customerMerchantProfileId: GlobalVariables().customerMerchantProfileId,
       amount: GlobalVariables().amount,
       signature: signature,
-      customerMobile: GlobalVariables().customerMobile,
+      customerMobile:
+          state.mobileNumber?.value.fold((l) => null, (r) => r) ?? "",
       customerEmail: GlobalVariables().customerEmail,
       description: GlobalVariables().description,
       customerFirstName: GlobalVariables().customerFirstName,

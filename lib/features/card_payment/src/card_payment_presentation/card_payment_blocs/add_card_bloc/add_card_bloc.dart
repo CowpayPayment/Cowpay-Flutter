@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 
 import '../../../../../../core/core.dart';
@@ -145,7 +143,7 @@ class AddCardBloc extends Bloc<AddCardEvent, AddCardState> {
   }
 
   Future<void> _retry(Emitter emitter) async {
-    state.copyWith(failure: null);
+    emitter(state.copyWith(failure: null));
     if (params is PayUseCaseParams) {
       await _payWithCard(emitter, params);
     } else if (params is GetPaymentFeesUseCaseParams) {
