@@ -111,7 +111,8 @@ class PaymentMethodsScreen extends StatelessWidget {
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      if (GlobalVariables().logoStringUrl != null)
+                      if (GlobalVariables().logoStringUrl != null &&
+                          (GlobalVariables().logoStringUrl ?? "").isNotEmpty)
                         _buildHeader(
                             imagePath: GlobalVariables().logoStringUrl!),
                       Expanded(
@@ -325,7 +326,7 @@ class PaymentMethodsScreen extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          text ?? context.localization('emptyData'),
+          text ?? context.localization('noPaymentMethodsAvailable'),
           style: TextStyles.bodyTextStyle.copyWith(color: AppColors.black),
         ),
       ],

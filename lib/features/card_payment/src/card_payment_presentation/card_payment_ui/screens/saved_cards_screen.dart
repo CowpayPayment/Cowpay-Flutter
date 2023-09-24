@@ -185,7 +185,7 @@ class SavedCardsScreen extends StatelessWidget {
                                       if ((state.cardsList?.length ?? 0) == 0) {
                                         return _emptyWidget(
                                             text: context.localization(
-                                                'noPaymentMethodsAvailable'),
+                                                'thereIsNoSavedCards'),
                                             context: context);
                                       }
                                       return _buildCardItem(
@@ -426,7 +426,7 @@ class SavedCardsScreen extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          text ?? context.localization('emptyData'),
+          text ?? context.localization('thereIsNoSavedCards'),
         ),
       ],
     );

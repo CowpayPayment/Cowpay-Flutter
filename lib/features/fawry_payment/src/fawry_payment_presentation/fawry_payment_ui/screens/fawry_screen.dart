@@ -117,7 +117,10 @@ class FawryScreen extends StatelessWidget {
                   if (state.screenIsLoading == true) {
                     return const Center(child: LoadingView());
                   }
-                  return const FawryWidget();
+                  if (state.failure == null) {
+                    return const FawryWidget();
+                  }
+                  return SizedBox();
                 }),
           ),
         ));
