@@ -20,7 +20,8 @@ class AddCardScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BackgroundView(
-        appBarStartActions: const BackButtonView(),
+        appBarStartActions:
+            BackButtonView(onTap: () => Navigator.of(context).pop()),
         title: context.localization('paymentDetails'),
         contentWidget: BlocProvider<AddCardBloc>(
           create: (context) => di<AddCardBloc>()
@@ -60,7 +61,7 @@ class AddCardScreen extends StatelessWidget {
                             return DialogView(
                               dialogType: DialogType.errorDialog,
                               mainButtonText: context.localization('close'),
-                              content:context
+                              content: context
                                   .localization(state.failure!.message ?? ''),
                               onMainActionFunction: (_) {
                                 Navigator.pop(builderCtx);
@@ -211,167 +212,180 @@ class _Form extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        BlocBuilder<AddCardBloc, AddCardState>(
-            buildWhen: (previous, current) =>
-                previous.cardHolderName != current.cardHolderName,
-            builder: (context, state) {
-              return const AppTextField().buildMainFormTextField(
-                maxLength: 50,
-                fieldData: FieldData(
-                    lable: context.localization("cardHolderName"),
-                    prefixIconPath: AppAssets.holderName),
-                onChange: (value) {
-                  context.read<AddCardBloc>().add(CardHolderNameChanged(value));
-                },
-                validator: (string) => state.cardHolderName?.value
-                    .fold((l) => context.localization(l.message!), (r) => null),
-              );
-            }),
-        BlocBuilder<AddCardBloc, AddCardState>(
-            buildWhen: (previous, current) =>
-                previous.cardNumber != current.cardNumber,
-            builder: (context, state) {
-              return const AppTextField().buildMainFormTextField(
-                formatters: cardNumberFormatters,
-                fieldData: FieldData(
-                    lable: context.localization("cardNumber"),
-                    hint: "xxxx xxxx xxxx xxxx",
-                    prefixIconPath: AppAssets.cardIcon),
-                textInputType: TextInputType.number,
-                onChange: (value) {
-                  context.read<AddCardBloc>().add(CardNumberChanged(value));
-                },
-                validator: (string) => state.cardNumber?.value
-                    .fold((l) => context.localization(l.message!), (r) => null),
-              );
-            }),
-        SizedBox(
-          height: 80.sp,
-          width: 1.sw,
-          child: Row(
+    return SizedBox(
+      height: 0.81.sh,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Column(
             children: [
-              Expanded(
-                child: BlocBuilder<AddCardBloc, AddCardState>(
-                    buildWhen: (previous, current) =>
-                        previous.cardExpiry != current.cardExpiry,
-                    builder: (context, state) {
-                      return const AppTextField().buildMainFormTextField(
-                        maxLength: 5,
-                        formatters: expiryFormatters,
-                        textInputType: const TextInputType.numberWithOptions(),
-                        fieldData: FieldData(
-                            lable: context.localization("expiryDate"),
-                            hint: 'MM/YY',
-                            prefixIconPath: AppAssets.expiryDateIcon),
-                        onChange: (value) {
-                          context
-                              .read<AddCardBloc>()
-                              .add(CardExpirationChanged(value));
-                        },
-                        validator: (string) => state.cardExpiry?.value.fold(
-                            (l) => context.localization(l.message!),
-                            (r) => null),
-                      );
-                    }),
+              BlocBuilder<AddCardBloc, AddCardState>(
+                  buildWhen: (previous, current) =>
+                      previous.cardHolderName != current.cardHolderName,
+                  builder: (context, state) {
+                    return const AppTextField().buildMainFormTextField(
+                      maxLength: 50,
+                      fieldData: FieldData(
+                          lable: context.localization("cardHolderName"),
+                          prefixIconPath: AppAssets.holderName),
+                      onChange: (value) {
+                        context.read<AddCardBloc>().add(CardHolderNameChanged(value));
+                      },
+                      validator: (string) => state.cardHolderName?.value
+                          .fold((l) => context.localization(l.message!), (r) => null),
+                    );
+                  }),
+              BlocBuilder<AddCardBloc, AddCardState>(
+                  buildWhen: (previous, current) =>
+                      previous.cardNumber != current.cardNumber,
+                  builder: (context, state) {
+                    return const AppTextField().buildMainFormTextField(
+                      formatters: cardNumberFormatters,
+                      textDirection: TextDirection.ltr,
+                      fieldData: FieldData(
+                          lable: context.localization("cardNumber"),
+                          hint: "xxxx xxxx xxxx xxxx",
+                          prefixIconPath: AppAssets.cardIcon),
+                      textInputType: TextInputType.number,
+                      onChange: (value) {
+                        context.read<AddCardBloc>().add(CardNumberChanged(value));
+                      },
+                      validator: (string) => state.cardNumber?.value
+                          .fold((l) => context.localization(l.message!), (r) => null),
+                    );
+                  }),
+              SizedBox(
+                height: 80.sp,
+                width: 1.sw,
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: BlocBuilder<AddCardBloc, AddCardState>(
+                          buildWhen: (previous, current) =>
+                              previous.cardExpiry != current.cardExpiry,
+                          builder: (context, state) {
+                            return const AppTextField().buildMainFormTextField(
+                              maxLength: 5,
+                              formatters: expiryFormatters,
+                              textInputType: const TextInputType.numberWithOptions(),
+                              fieldData: FieldData(
+                                  lable: context.localization("expiryDate"),
+                                  hint: 'MM/YY',
+                                  prefixIconPath: AppAssets.expiryDateIcon),
+                              onChange: (value) {
+                                context
+                                    .read<AddCardBloc>()
+                                    .add(CardExpirationChanged(value));
+                              },
+                              validator: (string) => state.cardExpiry?.value.fold(
+                                  (l) => context.localization(l.message!),
+                                  (r) => null),
+                            );
+                          }),
+                    ),
+                    Expanded(
+                      child: BlocBuilder<AddCardBloc, AddCardState>(
+                          buildWhen: (previous, current) =>
+                              previous.cardCvv != current.cardCvv,
+                          builder: (context, state) {
+                            return const AppTextField().buildMainFormTextField(
+                              maxLength: 3,
+                              textInputType: TextInputType.number,
+                              textInputAction: TextInputAction.done,
+                              fieldData: FieldData(
+                                  lable: context.localization("cvv"),
+                                  hint: 'xxx',
+                                  prefixIconPath: AppAssets.cvvIcon),
+                              onChange: (value) {
+                                context
+                                    .read<AddCardBloc>()
+                                    .add(CardCvvChanged(value));
+                              },
+                              validator: (string) => state.cardCvv?.value.fold(
+                                  (l) => context.localization(l.message!),
+                                  (r) => null),
+                            );
+                          }),
+                    ),
+                  ],
+                ),
               ),
-              Expanded(
-                child: BlocBuilder<AddCardBloc, AddCardState>(
-                    buildWhen: (previous, current) =>
-                        previous.cardCvv != current.cardCvv,
-                    builder: (context, state) {
-                      return const AppTextField().buildMainFormTextField(
-                        maxLength: 3,
-                        textInputType: TextInputType.number,
-                        textInputAction: TextInputAction.done,
-                        fieldData: FieldData(
-                            lable: context.localization("cvv"),
-                            hint: 'xxx',
-                            prefixIconPath: AppAssets.cvvIcon),
-                        onChange: (value) {
-                          context
-                              .read<AddCardBloc>()
-                              .add(CardCvvChanged(value));
-                        },
-                        validator: (string) => state.cardCvv?.value.fold(
-                            (l) => context.localization(l.message!),
-                            (r) => null),
-                      );
-                    }),
+              Row(
+                children: [
+                  Expanded(
+                    child: SizedBox(
+                      child: Text(
+                          context.localization(
+                            "saveThisCardInformationForFasterPayment",
+                          ),
+                          style: TextStyles.bodyTextStyle
+                              .copyWith(fontSize: 12.sp, color: AppColors.black)),
+                    ),
+                  ),
+                  BlocBuilder<AddCardBloc, AddCardState>(
+                      buildWhen: (previous, current) =>
+                          previous.isTokenized != current.isTokenized,
+                      builder: (context, state) {
+                        return Switch(
+                          value: state.isTokenized,
+                          onChanged: (value) {
+                            context
+                                .read<AddCardBloc>()
+                                .add(IsTokenizedChanged(value));
+                          },
+                          activeColor: AppColors.primary,
+                          inactiveThumbColor: AppColors.primary.withOpacity(0.5),
+                          inactiveTrackColor: AppColors.primary.withOpacity(0.3),
+                        );
+                      })
+                ],
               ),
+              BlocBuilder<AddCardBloc, AddCardState>(
+                  buildWhen: (previous, current) =>
+                      previous.feesModel != current.feesModel,
+                  builder: (context, state) {
+                    return PaymentDetailsWidget(
+                      feesModel: state.feesModel!,
+                      amount: GlobalVariables().amount,
+                      isFeesOnCustomer: GlobalVariables().isfeesOnCustomer,
+                    );
+                  }),
+
             ],
           ),
-        ),
-        Row(
-          children: [
-            Expanded(
-              child: SizedBox(
-                child: Text(
-                    context.localization(
-                      "saveThisCardInformationForFasterPayment",
-                    ),
-                    style: TextStyles.bodyTextStyle
-                        .copyWith(fontSize: 12.sp, color: AppColors.black)),
-              ),
-            ),
-            BlocBuilder<AddCardBloc, AddCardState>(
+          Column(
+            children: [
+              BlocBuilder<AddCardBloc, AddCardState>(
                 buildWhen: (previous, current) =>
-                    previous.isTokenized != current.isTokenized,
+                    previous.submitButtonIsLoading != current.submitButtonIsLoading ||
+                    previous.cardExpiry != current.cardExpiry ||
+                    previous.cardCvv != current.cardCvv ||
+                    previous.cardNumber != current.cardNumber ||
+                    previous.cardHolderName != current.cardHolderName,
                 builder: (context, state) {
-                  return Switch(
-                    value: state.isTokenized,
-                    onChanged: (value) {
-                      context
-                          .read<AddCardBloc>()
-                          .add(IsTokenizedChanged(value));
+                  if (state.submitButtonIsLoading) {
+                    return const ButtonLoadingView();
+                  }
+                  return ButtonView(
+                    textColor: AppColors.white,
+                    title: context.localization('pay'),
+                    isEnabled: (state.isFormValid),
+                    onClickFunction: (context) {
+                      FocusManager.instance.primaryFocus?.unfocus();
+                      context.read<AddCardBloc>().add(SubmitActionTapped());
                     },
-                    activeColor: AppColors.primary,
-                    inactiveThumbColor: AppColors.primary.withOpacity(0.5),
-                    inactiveTrackColor: AppColors.primary.withOpacity(0.3),
+                    mainContext: context,
+                    // width: 0.8.sw,
                   );
-                })
-          ],
-        ),
-        BlocBuilder<AddCardBloc, AddCardState>(
-            buildWhen: (previous, current) =>
-                previous.feesModel != current.feesModel,
-            builder: (context, state) {
-              return PaymentDetailsWidget(
-                feesModel: state.feesModel!,
-                amount: GlobalVariables().amount,
-                isFeesOnCustomer: GlobalVariables().isfeesOnCustomer,
-              );
-            }),
-        SizedBox(height: 0.2.sh),
-        BlocBuilder<AddCardBloc, AddCardState>(
-          buildWhen: (previous, current) =>
-              previous.submitButtonIsLoading != current.submitButtonIsLoading ||
-              previous.cardExpiry != current.cardExpiry ||
-              previous.cardCvv != current.cardCvv ||
-              previous.cardNumber != current.cardNumber ||
-              previous.cardHolderName != current.cardHolderName,
-          builder: (context, state) {
-            if (state.submitButtonIsLoading) {
-              return const ButtonLoadingView();
-            }
-            return ButtonView(
-              textColor: AppColors.white,
-              title: context.localization('pay'),
-              isEnabled: (state.isFormValid),
-              onClickFunction: (context) {
-                FocusManager.instance.primaryFocus?.unfocus();
-                context.read<AddCardBloc>().add(SubmitActionTapped());
-              },
-              mainContext: context,
-              // width: 0.8.sw,
-            );
-          },
-        ),
-        SizedBox(
-          height: 35.sp,
-        )
-      ],
+                },
+              ),
+              SizedBox(
+                height: 0.012.sh,
+              ),
+            ],
+          )
+        ],
+      ),
     );
   }
 }

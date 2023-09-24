@@ -60,7 +60,7 @@ class AppDecorations {
           ),
         ),
         errorStyle:
-            TextStyles.bodyTextStyle.copyWith(color: AppColors.errorColor),
+            TextStyles.bodyTextStyle.copyWith(color: AppColors.errorColor,fontSize: 8.sp),
         focusedErrorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10.0.sp),
           borderSide: BorderSide(

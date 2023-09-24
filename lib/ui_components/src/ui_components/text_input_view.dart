@@ -27,6 +27,7 @@ class AppTextField extends StatelessWidget {
       this.fillColor,
       this.isDense,
       this.hintTextStyle,
+      this.textDirection,
       this.height,
       this.cornerRadius = 24,
       this.textStyle,
@@ -63,6 +64,7 @@ class AppTextField extends StatelessWidget {
   final TextStyle? hintTextStyle;
   final TextStyle? labelTextStyle;
   final TextStyle? textStyle;
+  final TextDirection? textDirection;
   final double cornerRadius;
   final Color? focusedBorderColor;
   final double? focusedBorderThickness;
@@ -84,6 +86,7 @@ class AppTextField extends StatelessWidget {
         child: Column(
           children: [
             TextFormField(
+              textDirection: textDirection,
               inputFormatters: formatters,
               focusNode: focusNode,
               obscureText: obscureText,
@@ -132,6 +135,7 @@ class AppTextField extends StatelessWidget {
                 enabledBorderThickness: enabledBorderThickness,
                 errorBorderColor: AppColors.errorColor,
                 errorBorderThickness: errorBorderThickness,
+
               ),
               cursorColor: AppColors.primary,
               textInputAction: textInputAction ?? TextInputAction.next,
@@ -152,6 +156,7 @@ class AppTextField extends StatelessWidget {
     Function(String value)? onChange,
     TextInputAction? textInputAction,
     TextInputType? textInputType,
+    TextDirection? textDirection,
     int? maxLength,
     Function? onPressSuffixIcon,
     Function()? onPress,
@@ -170,6 +175,7 @@ class AppTextField extends StatelessWidget {
           maxLength: maxLength,
           onChanged: onChange,
           obscureText: obscureText,
+          textDirection: textDirection,
           controller: controller,
           labelKey: fieldData.lable,
           enabled: isEnable,
