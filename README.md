@@ -87,6 +87,6 @@ return Cowpay(
 
 ## DOCUMENTATION
 
-You can  check the [documentation](https://lumin-soft.gitbook.io/cowpay/mobile-sdk).
+You can  check the [documentation](https://lumin-soft.gitbook.io/cowpay/cowpay-flutter-plugin).
 
 
