@@ -15,9 +15,10 @@ class CardNumber extends Equatable {
 
   static Either<ValidationFailure, CardNumberData> _validateOtpCode(
       String value) {
-    final isNumber = RegExp(r"^((?:[0-9]+ ?){4,})$").hasMatch(value);
+    String newValue=value.replaceAll('-', ' ');
+    final isNumber = RegExp(r"^((?:[0-9]+ ?){4,})$").hasMatch(newValue);
     if (isNumber) {
-      String trimedValue = value.replaceAll(" ", '');
+      String trimedValue = newValue.replaceAll(" ", '');
       final masterCardIsMatched = RegExp(
               r"^(5[1-5][0-9]{14}|2(22[1-9][0-9]{12}|2[3-9][0-9]{13}|[3-6][0-9]{14}|7[0-1][0-9]{13}|720[0-9]{12}))$")
           .hasMatch(trimedValue);
@@ -30,10 +31,10 @@ class CardNumber extends Equatable {
 
       if (masterCardIsMatched) {
         return Right(
-            CardNumberData(number: value, cardType: CardType.masterCard));
+            CardNumberData(number: newValue, cardType: CardType.masterCard));
       } else if (visaCard) {
         return Right(
-            CardNumberData(number: value, cardType: CardType.visaCard));
+            CardNumberData(number: newValue, cardType: CardType.visaCard));
       }
       // else if (visaMasterCard) {
       //   return Right(

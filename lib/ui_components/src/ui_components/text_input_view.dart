@@ -156,7 +156,6 @@ class AppTextField extends StatelessWidget {
     Function(String value)? onChange,
     TextInputAction? textInputAction,
     TextInputType? textInputType,
-    TextDirection? textDirection,
     int? maxLength,
     Function? onPressSuffixIcon,
     Function()? onPress,

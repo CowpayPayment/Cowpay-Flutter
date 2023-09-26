@@ -207,7 +207,7 @@ class _Form extends StatelessWidget {
   ];
   final List<MaskTextInputFormatter> cardNumberFormatters = [
     MaskTextInputFormatter(
-        mask: '#### #### #### ####', type: MaskAutoCompletionType.lazy)
+        mask: '####-####-####-####', type: MaskAutoCompletionType.lazy)
   ];
 
   @override
@@ -241,7 +241,6 @@ class _Form extends StatelessWidget {
                   builder: (context, state) {
                     return const AppTextField().buildMainFormTextField(
                       formatters: cardNumberFormatters,
-                      textDirection: TextDirection.ltr,
                       fieldData: FieldData(
                           lable: context.localization("cardNumber"),
                           hint: "xxxx xxxx xxxx xxxx",
