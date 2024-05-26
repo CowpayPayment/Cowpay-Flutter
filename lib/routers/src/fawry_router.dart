@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../features/fawry_payment/fawry_payment.dart';
+import '../../features/fawry_payment/src/fawry_payment_presentation/fawry_payment_ui/screens/fawry_screen.dart';
 
 class FawryRouter {
   FawryRouter._();

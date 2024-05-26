@@ -1,9 +1,9 @@
-import 'package:cowpay/cowpay.dart';
+import 'package:cowpay/core/packages/screen_util/screen_util.dart';
+import 'package:cowpay/localization/src/localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 
 import '../../../core/core.dart';
+import '../../../core/packages/flutter_svg/flutter_svg.dart';
 import '../../ui_components.dart';
 
 class BackButtonView extends StatelessWidget {

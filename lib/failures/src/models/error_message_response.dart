@@ -1,5 +1,4 @@
-
-import '../../../network/network.dart';
+import '../../../network/src/response/response_model.dart';
 
 class ErrorMessageResponse extends ResponseModel {
   ErrorMessageResponse({required this.message, this.errors});

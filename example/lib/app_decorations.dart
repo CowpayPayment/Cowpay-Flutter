@@ -1,7 +1,4 @@
-import 'package:cowpay/core/packages/screen_util/screen_util.dart';
 import 'package:flutter/material.dart';
-
-import '../ui_components.dart';
 
 class AppDecorations {
   static InputDecoration inputTextDecoration({
@@ -18,61 +15,76 @@ class AppDecorations {
     double? focusedBorderThickness,
     Color? enabledBorderColor,
     double? enabledBorderThickness,
-    Color? errorBorderColor,
-    double? errorBorderThickness,
+    Color? erroBorderColor,
+    double? erroBorderThickness,
   }) =>
       InputDecoration(
         counterText: "",
-        labelStyle: labelTextStyle ?? TextStyles.appTextFieldStyle,
+        labelStyle: labelTextStyle ??
+            const TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.w500,
+              fontSize: 13.0,
+            ),
         prefixIconConstraints:
             const BoxConstraints(minHeight: 20, minWidth: 20),
         prefixIcon: prefixIcon,
         contentPadding: isDense == null
-            ? EdgeInsets.symmetric(horizontal: 10.sp, vertical: 8.sp)
+            ? const EdgeInsets.symmetric(horizontal: 10, vertical: 8)
             : const EdgeInsets.all(8),
         suffixIcon: suffixIcon,
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10.0.sp),
+          borderRadius: BorderRadius.circular(10.0),
           borderSide: BorderSide(
-            width: focusedBorderThickness ?? 1.sp,
-            color: focusedBorderColor ?? AppColors.primary,
+            width: focusedBorderThickness ?? 1,
+            color: focusedBorderColor ?? Colors.grey,
           ),
         ),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10.0.sp),
+          borderRadius: BorderRadius.circular(10.0),
           borderSide: BorderSide(
-            width: enabledBorderThickness ?? 1.sp,
-            color: enabledBorderColor ?? AppColors.primary.withOpacity(0.3),
+            width: enabledBorderThickness ?? 1,
+            color: enabledBorderColor ?? Colors.grey.withOpacity(0.3),
           ),
         ),
         disabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10.0.sp),
-          borderSide: BorderSide(
-            width: enabledBorderThickness ?? 1.sp,
-            color: enabledBorderColor ?? AppColors.primary.withOpacity(0.3),
-          ),
-        ),
+            borderRadius: BorderRadius.circular(10.0),
+            borderSide: BorderSide(
+              width: enabledBorderThickness ?? 1,
+              color: enabledBorderColor ??
+                  Colors.grey.withOpacity(
+                    0.3,
+                  ),
+            )),
         errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10.0.sp),
+          borderRadius: BorderRadius.circular(10.0),
           borderSide: BorderSide(
-            width: errorBorderThickness ?? 2.sp,
-            color: errorBorderColor ?? AppColors.errorColor,
+            width: erroBorderThickness ?? 2,
+            color: erroBorderColor ?? Colors.red,
           ),
         ),
-        errorStyle:
-            TextStyles.bodyTextStyle.copyWith(color: AppColors.errorColor),
+        errorStyle: const TextStyle(
+          color: Colors.black,
+          fontWeight: FontWeight.w500,
+          fontSize: 13.0,
+        ).copyWith(color: Colors.grey),
         focusedErrorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10.0.sp),
+          borderRadius: BorderRadius.circular(10.0),
           borderSide: BorderSide(
-            width: errorBorderThickness ?? 2.sp,
-            color: errorBorderColor ?? AppColors.errorColor,
+            width: erroBorderThickness ?? 2,
+            color: erroBorderColor ?? Colors.red,
           ),
         ),
         // errorStyle: AppTextsStyles.appTextFieldErrorStyle,
         hintText: hint,
         labelText: label,
-        hintStyle: hintTextStyle ?? TextStyles.hintTextStyle,
-        fillColor: fillColor ?? AppColors.white,
+        hintStyle: hintTextStyle ??
+            const TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.w500,
+              fontSize: 13.0,
+            ),
+        fillColor: fillColor ?? Colors.white,
         focusColor: Colors.black,
         filled: true,
         alignLabelWithHint: true,
@@ -84,16 +96,20 @@ class AppDecorations {
       begin: Alignment(0.5, 0),
       end: Alignment(0.5, 1),
       colors: [
+        // AppColors.orangeyRed.withOpacity(0.12),
+        // AppColors.goldenrod.withOpacity(0.087),
         Color.fromRGBO(254, 243, 239, 1.0),
         Color.fromRGBO(255, 249, 237, 1),
       ],
     ),
   );
   static BoxDecoration tabBarDecoration = BoxDecoration(
-    color: AppColors.white,
-    borderRadius: BorderRadius.circular(12.r),
+    color: Colors.white,
+    borderRadius: BorderRadius.circular(12),
     gradient: const LinearGradient(
       colors: [
+        // Color(0x52F04E37),
+        // Color(0x22FBBC0F),
         Color.fromRGBO(252, 217, 210, 1),
         Color.fromRGBO(253, 230, 205, 1),
       ],

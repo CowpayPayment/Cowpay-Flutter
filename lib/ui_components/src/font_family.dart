@@ -1,5 +1,4 @@
-
-import '../../localization/src/localization.dart';
+import '../../localization/localization.dart';
 
 class FontFamily {
   static final FontFamily _instance = FontFamily.internal();

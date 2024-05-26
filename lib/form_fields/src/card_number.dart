@@ -1,11 +1,10 @@
-
-import 'package:dartz/dartz.dart';
-import 'package:equatable/equatable.dart';
-
+import '../../core/packages/dartz/dartz.dart';
+import '../../core/packages/equatable/equatable.dart';
 import '../../failures/failures.dart';
 
 class CardNumber extends Equatable {
   factory CardNumber(String value) => CardNumber._(_validateOtpCode(value));
+
   factory CardNumber.error(ValidationFailure failure) =>
       CardNumber._(Left(failure));
 
@@ -15,26 +14,26 @@ class CardNumber extends Equatable {
 
   static Either<ValidationFailure, CardNumberData> _validateOtpCode(
       String value) {
-    String newValue=value.replaceAll('-', ' ');
-    final isNumber = RegExp(r"^((?:[0-9]+ ?){4,})$").hasMatch(newValue);
+    final isNumber =
+        RegExp(r"^((?:[0-9]+ ?){4,})$").hasMatch(value.replaceAll('-', ' '));
     if (isNumber) {
-      String trimedValue = newValue.replaceAll(" ", '');
+      String trimmedValue = value.replaceAll(" ", '').replaceAll('-', '');
       final masterCardIsMatched = RegExp(
               r"^(5[1-5][0-9]{14}|2(22[1-9][0-9]{12}|2[3-9][0-9]{13}|[3-6][0-9]{14}|7[0-1][0-9]{13}|720[0-9]{12}))$")
-          .hasMatch(trimedValue);
+          .hasMatch(trimmedValue);
       final visaCard =
-          RegExp(r"^4[0-9]{12}(?:[0-9]{3})?$").hasMatch(trimedValue);
+          RegExp(r"^4[0-9]{12}(?:[0-9]{3})?$").hasMatch(trimmedValue);
       // final visaMasterCard =
       //     RegExp(r"^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14})$")
       //         .hasMatch(value);
       // final meeza = RegExp(r"^5078(03|09|10|11)\d{10}$").hasMatch(value);
 
       if (masterCardIsMatched) {
-        return Right(
-            CardNumberData(number: newValue, cardType: CardType.masterCard));
+        return Right(CardNumberData(
+            number: value.replaceAll('-', ''), cardType: CardType.masterCard));
       } else if (visaCard) {
-        return Right(
-            CardNumberData(number: newValue, cardType: CardType.visaCard));
+        return Right(CardNumberData(
+            number: value.replaceAll('-', ''), cardType: CardType.visaCard));
       }
       // else if (visaMasterCard) {
       //   return Right(

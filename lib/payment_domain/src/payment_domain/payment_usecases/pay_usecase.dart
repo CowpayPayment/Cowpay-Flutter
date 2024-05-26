@@ -1,6 +1,5 @@
-import 'package:dartz/dartz.dart';
-
 import '../../../../core/core.dart';
+import '../../../../core/packages/dartz/dartz.dart';
 import '../../../../domain_models/domain_models.dart';
 import '../../../../failures/failures.dart';
 import '../../../payment_domain.dart';
@@ -28,7 +27,7 @@ class PayUseCase
         signature: params.signature,
         customerMobile: params.customerMobile,
         customerEmail: params.customerEmail,
-        isfeesOnCustomer: params.isfeesOnCustomer,
+        isFeesOnCustomer: params.isFeesOnCustomer,
         description: params.description,
         customerFirstName: params.customerFirstName,
         customerLastName: params.customerLastName,
@@ -49,7 +48,7 @@ class PayUseCaseParams {
   final String signature;
   final String customerMobile;
   final String customerEmail;
-  final bool isfeesOnCustomer;
+  final bool isFeesOnCustomer;
   final String description;
   final String customerFirstName;
   final String customerLastName;
@@ -64,7 +63,7 @@ class PayUseCaseParams {
     required this.signature,
     required this.customerMobile,
     required this.customerEmail,
-    required this.isfeesOnCustomer,
+    required this.isFeesOnCustomer,
     required this.description,
     required this.customerFirstName,
     required this.customerLastName,

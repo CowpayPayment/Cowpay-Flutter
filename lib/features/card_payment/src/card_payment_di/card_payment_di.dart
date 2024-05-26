@@ -1,4 +1,3 @@
-
 import '../../../../core/packages/get_it/get_it.dart';
 import '../card_payment_data/card_payment_datasources/card_payment_remote_datasource.dart';
 import '../card_payment_data/card_payment_repository/card_payment_repository_impl.dart';
@@ -24,8 +23,8 @@ class CardPaymentDI {
             () => CardPaymentRemoteDataSourceImpl(network: di()))
 
         //region UseCases
-        ..registerLazySingleton(() => GetUserCardsUseCase(
-            repository: di())) //endregion
+        ..registerLazySingleton(
+            () => GetUserCardsUseCase(repository: di())) //endregion
 
         //region Blocs
         ..registerFactory(() => PaymentWebViewBloc())
@@ -41,7 +40,6 @@ class CardPaymentDI {
             getUserCardsUseCase: di(),
           ),
         ); //endregion
-
     }
   }
 }

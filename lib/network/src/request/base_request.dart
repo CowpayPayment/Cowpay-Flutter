@@ -17,8 +17,8 @@ class BaseRequestDefaults {
 
   void setHeader(Map<String, String> header) => _header = header;
 
-  void setToken(String ntoken, {String? refreshToken}) {
-    _token = {'Authorization': 'Bearer $ntoken'};
+  void setToken(String nToken, {String? refreshToken}) {
+    _token = {'Authorization': 'Bearer $nToken'};
     if (refreshToken != null) {
       _refreshToken = refreshToken;
     }

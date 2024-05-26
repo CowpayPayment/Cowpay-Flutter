@@ -1,13 +1,11 @@
-import 'package:cowpay/cowpay.dart';
-import 'package:dartz/dartz.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../core/core.dart';
+import '../../../../../../core/packages/dartz/dartz.dart';
 import '../../../../../../core/packages/equatable/equatable.dart';
+import '../../../../../../core/packages/flutter_bloc/flutter_bloc.dart';
 import '../../../../../../domain_models/domain_models.dart';
 import '../../../../../../failures/failures.dart';
-import '../../../../../../form_fields/form_fields.dart';
 import '../../../../../../payment_domain/payment_domain.dart';
 
 part 'fawry_event.dart';
@@ -34,9 +32,11 @@ class FawryBloc extends Bloc<FawryEvent, FawryState> {
         if (event is GetFeesEvent) {
           await getFees(emitter);
         } else if (event is Retry) {
-          await _retry(emitter);
+          _retry(emitter);
         } else if (event is MobileNumberChanged) {
           _mobileNumberChanged(emitter, event.value);
+        } else if (event is PhoneValidChanged) {
+          _phoneValidChangedChanged(emitter, event.value);
         } else if (event is SubmitActionTapped) {
           await payWithFawry(emitter);
         }
@@ -45,7 +45,11 @@ class FawryBloc extends Bloc<FawryEvent, FawryState> {
   }
 
   void _mobileNumberChanged(Emitter emitter, String value) {
-    emitter(state.copyWith(mobileNumber: MobileNumber(value)));
+    emitter(state.copyWith(mobileNumber: value));
+  }
+
+  void _phoneValidChangedChanged(Emitter emitter, bool value) {
+    emitter(state.copyWith(isFormValid: value));
   }
 
   Future<void> getFees(Emitter emitter) async {
@@ -65,20 +69,14 @@ class FawryBloc extends Bloc<FawryEvent, FawryState> {
     emitter(
       response.fold(
         (l) => state.copyWith(failure: l, screenIsLoading: false),
-        (r) => state.copyWith(
-            feesModel: r,
-            screenIsLoading: false,
-            mobileNumber: MobileNumber(GlobalVariables().customerMobile)),
+        (r) => state.copyWith(feesModel: r, screenIsLoading: false),
       ),
     );
   }
 
-  Future<void> _retry(Emitter emitter) async {
-    emitter(state.copyWith(failure: null));
-    if (params is GetPaymentFeesUseCaseParams) {
-      await _getFees(emitter, params);
-    } else if (params is PayUseCaseParams) {
-      await _payWithFawry(emitter, params);
+  void _retry(Emitter emitter) {
+    if (params.runtimeType is GetPaymentFeesUseCaseParams) {
+      _getFees(emitter, params);
     }
   }
 
@@ -101,13 +99,12 @@ class FawryBloc extends Bloc<FawryEvent, FawryState> {
       customerMerchantProfileId: GlobalVariables().customerMerchantProfileId,
       amount: GlobalVariables().amount,
       signature: signature,
-      customerMobile:
-          state.mobileNumber?.value.fold((l) => null, (r) => r) ?? "",
+      customerMobile: GlobalVariables().customerMobile,
       customerEmail: GlobalVariables().customerEmail,
       description: GlobalVariables().description,
       customerFirstName: GlobalVariables().customerFirstName,
       customerLastName: GlobalVariables().customerLastName,
-      isfeesOnCustomer: GlobalVariables().isfeesOnCustomer,
+      isFeesOnCustomer: GlobalVariables().isFeesOnCustomer,
     );
     await _payWithFawry(emitter, params);
   }

@@ -3,7 +3,6 @@ part of 'payment_methods_bloc.dart';
 @immutable
 class PaymentMethodsState extends Equatable {
   const PaymentMethodsState({
-    // this.methods,
     this.failure,
     this.chosenMethod,
     this.submitButtonIsLoading = false,
@@ -11,7 +10,6 @@ class PaymentMethodsState extends Equatable {
     this.paymentMethods,
   });
 
-  // final List<Market>? methods;
   final Failure? failure;
   final PaymentOptions? chosenMethod;
   final bool? submitButtonIsLoading;
@@ -19,7 +17,6 @@ class PaymentMethodsState extends Equatable {
   final List<PaymentOptions>? paymentMethods;
 
   PaymentMethodsState copyWith({
-    // List<Market>? methods,
     Failure? failure,
     PaymentOptions? chosenMethod,
     bool? submitButtonIsLoading,
@@ -27,7 +24,6 @@ class PaymentMethodsState extends Equatable {
     List<PaymentOptions>? paymentMethods,
   }) {
     return PaymentMethodsState(
-      // methods: methods ?? this.methods,
       failure: failure,
       chosenMethod: chosenMethod ?? this.chosenMethod,
       submitButtonIsLoading:
@@ -39,7 +35,6 @@ class PaymentMethodsState extends Equatable {
 
   @override
   List<Object?> get props => [
-        // methods,
         failure,
         chosenMethod,
         submitButtonIsLoading,

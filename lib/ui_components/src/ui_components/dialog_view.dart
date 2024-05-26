@@ -1,10 +1,10 @@
 import 'dart:math';
 
+import 'package:cowpay/core/packages/screen_util/screen_util.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 
+import '../../../core/packages/flutter_svg/flutter_svg.dart';
 import '../../ui_components.dart';
 
 class DialogView extends StatelessWidget {
@@ -48,8 +48,8 @@ class DialogView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () => Future.value(isDismissible),
+    return PopScope(
+      canPop: isDismissible ?? false,
       child: ClipRRect(
         borderRadius: BorderRadius.circular(25.sp),
         child: Stack(
@@ -62,14 +62,6 @@ class DialogView extends StatelessWidget {
               child: SizedBox(
                 height: 0.4.sh,
                 width: 1.0.sw,
-                // decoration: BoxDecoration(
-                //   // borderRadius: const BorderRadius.all(Radius.circular(20)),
-                //   gradient: LinearGradient(
-                //     begin: Alignment.topCenter,
-                //     end: Alignment.bottomCenter,
-                //     colors: [dialogType.gradiantColor, AppColors.white],
-                //   ),
-                // ),
               ),
             ),
             Column(

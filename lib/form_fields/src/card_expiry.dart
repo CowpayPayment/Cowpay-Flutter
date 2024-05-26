@@ -1,12 +1,12 @@
+import 'package:cowpay/core/packages/equatable/equatable.dart';
 
-import 'package:dartz/dartz.dart';
-import 'package:equatable/equatable.dart';
-
+import '../../core/packages/dartz/dartz.dart';
 import '../../failures/failures.dart';
 
 class CardExpiry extends Equatable {
   factory CardExpiry(String value) =>
       CardExpiry._(_validateQualification(value));
+
   factory CardExpiry.error(ValidationFailure failure) =>
       CardExpiry._(Left(failure));
 

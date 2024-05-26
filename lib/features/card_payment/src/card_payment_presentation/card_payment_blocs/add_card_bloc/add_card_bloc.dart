@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 
 import '../../../../../../core/core.dart';
 import '../../../../../../core/packages/dartz/dartz.dart';
@@ -10,6 +10,7 @@ import '../../../../../../form_fields/form_fields.dart';
 import '../../../../../../payment_domain/payment_domain.dart';
 
 part 'add_card_event.dart';
+
 part 'add_card_state.dart';
 
 class AddCardBloc extends Bloc<AddCardEvent, AddCardState> {
@@ -32,7 +33,7 @@ class AddCardBloc extends Bloc<AddCardEvent, AddCardState> {
         if (event is GetFeesEvent) {
           await getFees(emitter);
         } else if (event is SubmitActionTapped) {
-          await payWithCard(emitter);
+          await payWithCard(emitter, event);
         } else if (event is CardCvvChanged) {
           _cardCvvChanged(emitter, event.value);
         } else if (event is CardExpirationChanged) {
@@ -55,7 +56,7 @@ class AddCardBloc extends Bloc<AddCardEvent, AddCardState> {
     params = GetPaymentFeesUseCaseParams(
         merchantCode: GlobalVariables().merchantCode,
         amount: GlobalVariables().amount,
-        paymentMethodType: PaymentOptions.creditCard.id);
+        paymentMethodType: PaymentOptions.bankCard.id);
     await _getFees(emitter, params);
   }
 
@@ -84,7 +85,7 @@ class AddCardBloc extends Bloc<AddCardEvent, AddCardState> {
     );
   }
 
-  Future<void> payWithCard(Emitter emitter) async {
+  Future<void> payWithCard(Emitter emitter, SubmitActionTapped event) async {
     if (!state.isFormValid) return;
     emitter(state.copyWith(submitButtonIsLoading: true));
 
@@ -98,7 +99,7 @@ class AddCardBloc extends Bloc<AddCardEvent, AddCardState> {
       ),
     );
     params = PayUseCaseParams(
-      paymentOptions: PaymentOptions.creditCard,
+      paymentOptions: event.paymentOption,
       merchantReferenceId: GlobalVariables().merchantReferenceId,
       customerMerchantProfileId: GlobalVariables().customerMerchantProfileId,
       amount: GlobalVariables().amount,
@@ -108,7 +109,7 @@ class AddCardBloc extends Bloc<AddCardEvent, AddCardState> {
       description: GlobalVariables().description,
       customerFirstName: GlobalVariables().customerFirstName,
       customerLastName: GlobalVariables().customerLastName,
-      isfeesOnCustomer: GlobalVariables().isfeesOnCustomer,
+      isFeesOnCustomer: GlobalVariables().isFeesOnCustomer,
       cardPaymentData: CardPaymentData(
         cardCvv: state.cardCvv!,
         cardExpiry: state.cardExpiry!,
@@ -143,7 +144,7 @@ class AddCardBloc extends Bloc<AddCardEvent, AddCardState> {
   }
 
   Future<void> _retry(Emitter emitter) async {
-    emitter(state.copyWith(failure: null));
+    state.copyWith(failure: null);
     if (params is PayUseCaseParams) {
       await _payWithCard(emitter, params);
     } else if (params is GetPaymentFeesUseCaseParams) {

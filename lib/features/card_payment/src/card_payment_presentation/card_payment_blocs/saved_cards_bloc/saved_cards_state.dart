@@ -5,7 +5,7 @@ class SavedCardsState extends Equatable {
   const SavedCardsState({
     this.failure,
     this.cardsList,
-    this.choosenCard,
+    this.chosenCard,
     this.cvvNumber,
     this.payResponse,
     this.feesModel,
@@ -15,7 +15,7 @@ class SavedCardsState extends Equatable {
   final Failure? failure;
   final bool isScreenLoading;
   final List<TokenizedCardDetails>? cardsList;
-  final TokenizedCardDetails? choosenCard;
+  final TokenizedCardDetails? chosenCard;
   final String? cvvNumber;
   final PayResponseModel? payResponse;
   final FeesModel? feesModel;
@@ -24,7 +24,7 @@ class SavedCardsState extends Equatable {
       {Failure? failure,
       bool? isScreenLoading,
       List<TokenizedCardDetails>? cardsList,
-      TokenizedCardDetails? choosenCard,
+      TokenizedCardDetails? chosenCard,
       FeesModel? feesModel,
       PayResponseModel? payResponse,
       String? cvvNumber}) {
@@ -32,7 +32,7 @@ class SavedCardsState extends Equatable {
       failure: failure ?? this.failure,
       isScreenLoading: isScreenLoading ?? this.isScreenLoading,
       cardsList: cardsList ?? this.cardsList,
-      choosenCard: choosenCard ?? this.choosenCard,
+      chosenCard: chosenCard ?? this.chosenCard,
       cvvNumber: cvvNumber ?? this.cvvNumber,
       payResponse: payResponse ?? this.payResponse,
       feesModel: feesModel ?? this.feesModel,
@@ -44,7 +44,7 @@ class SavedCardsState extends Equatable {
         failure,
         isScreenLoading,
         cardsList,
-        choosenCard,
+        chosenCard,
         cvvNumber,
         payResponse,
         feesModel,

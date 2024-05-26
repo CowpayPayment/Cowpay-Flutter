@@ -1,6 +1,4 @@
-
-import 'package:get_it/get_it.dart';
-
+import '../../../core/packages/get_it/get_it.dart';
 import '../../payment_domain.dart';
 import '../payment_data/payment_datasources/payment_remote_datasource.dart';
 import '../payment_data/payment_repository/payment_repository_impl.dart';

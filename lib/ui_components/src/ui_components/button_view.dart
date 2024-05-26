@@ -1,5 +1,5 @@
+import 'package:cowpay/core/packages/screen_util/screen_util.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../src/app_colors.dart';
 import '../../src/text_styles.dart';
@@ -47,10 +47,13 @@ class ButtonView extends StatelessWidget {
               border:
                   borderColor != null ? Border.all(color: borderColor!) : null,
               borderRadius: BorderRadius.all(Radius.circular(11.sp))),
-          child: Text(title,
-              style: TextStyles.appBarTitleTextStyle
-                  .copyWith(color: textColor ?? Colors.white, fontSize: 15.sp),
-              textScaleFactor: textScaleFactor!)),
+          child: Text(
+            title,
+            style: TextStyles.appBarTitleTextStyle
+                .copyWith(color: textColor ?? Colors.white, fontSize: 15.sp),
+            // textScaleFactor: textScaleFactor!
+            textScaler: TextScaler.linear(textScaleFactor!),
+          )),
     );
   }
 }

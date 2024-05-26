@@ -1,4 +1,3 @@
-
 import '../../../../../domain_models/domain_models.dart';
 import '../../../../../routers/routers.dart';
 import '../../../../../ui_components/ui_components.dart';
@@ -18,6 +17,8 @@ extension PaymentOptionsExt on PaymentOptions {
         return AppAssets.meezaLogoPng;
       case PaymentOptions.bosta:
         return AppAssets.bostaLogoPng;
+      case PaymentOptions.bankCard:
+        return AppAssets.bankCardIcon;
       case PaymentOptions.valu:
         return '';
       default:
@@ -32,6 +33,8 @@ extension PaymentOptionsExt on PaymentOptions {
         return CardPaymentScreens.savedCardsScreenId;
       case PaymentOptions.fawryPay:
         return FawryScreens.fawryScreenId;
+      case PaymentOptions.bankCard:
+        return CardPaymentScreens.addCardScreenId;
       case PaymentOptions.fawryB2B:
         return '';
       case PaymentOptions.meezaCard:

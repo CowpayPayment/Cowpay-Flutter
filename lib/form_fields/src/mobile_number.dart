@@ -1,8 +1,5 @@
-
-
-import 'package:dartz/dartz.dart';
-import 'package:equatable/equatable.dart';
-
+import '../../core/packages/dartz/dartz.dart';
+import '../../core/packages/equatable/equatable.dart';
 import '../../failures/failures.dart';
 
 class MobileNumber extends Equatable {

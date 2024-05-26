@@ -1,6 +1,6 @@
-import 'package:cowpay/cowpay.dart';
+import 'package:cowpay/core/packages/screen_util/screen_util.dart';
+import 'package:cowpay/localization/src/localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../ui_components/ui_components.dart';
 import '../../../../payment_domain.dart';
@@ -9,6 +9,7 @@ class PaymentDetailsWidget extends StatelessWidget {
   final num amount;
   final FeesModel feesModel;
   final bool isFeesOnCustomer;
+
   const PaymentDetailsWidget(
       {required this.feesModel,
       required this.amount,
@@ -82,7 +83,7 @@ class PaymentDetailsWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         SizedBox(
-          width: 0.6.sw,
+          width: 0.58.sw,
           child: Text(context.localization(title),
               style: TextStyles.bodyTextStyle.copyWith(
                 fontSize: 12.sp,

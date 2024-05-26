@@ -70,10 +70,8 @@ class Loader {
         barrierDismissible: kDebugMode,
         builder: (BuildContext context) {
           _dismissingContext = context;
-          return WillPopScope(
-            onWillPop: () {
-              return Future.value(false);
-            },
+          return PopScope(
+            canPop: false,
             child: _dialog,
           );
         },
@@ -92,8 +90,6 @@ class LoadingImage extends StatelessWidget {
       filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
       child: const SpinKitFadingCircle(color: AppColors.primary),
     ) // mockApp
-        // ? const Text('loading')
-        // : const SpinKitFadingCircle(color: AppColors.white),
         );
   }
 }

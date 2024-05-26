@@ -1,10 +1,10 @@
-
 import 'package:flutter/foundation.dart';
 
 import '../../../../../../core/packages/equatable/equatable.dart';
 import '../../../../../../core/packages/flutter_bloc/flutter_bloc.dart';
 
 part 'payment_web_view_event.dart';
+
 part 'payment_web_view_state.dart';
 
 class PaymentWebViewBloc

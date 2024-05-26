@@ -7,6 +7,7 @@ enum PaymentOptions {
   meezaPay,
   bosta,
   valu,
+  bankCard,
   unhandledMethod,
 }
 
@@ -15,9 +16,11 @@ extension PaymentOptionsExtension on PaymentOptions {
     switch (this) {
       case PaymentOptions.creditCard:
       case PaymentOptions.tokenizedCreditCard:
-        return 'creditCard';
+        return 'credit_card';
+      case PaymentOptions.bankCard:
+        return 'bank_card';
       case PaymentOptions.fawryPay:
-        return 'fawry';
+        return 'fawry_pay';
       case PaymentOptions.fawryB2B:
         return 'Fawry B2B';
       case PaymentOptions.meezaCard:
@@ -49,6 +52,8 @@ extension PaymentOptionsExtension on PaymentOptions {
         return PaymentOptions.bosta;
       case 7:
         return PaymentOptions.valu;
+      case 12:
+        return PaymentOptions.bankCard;
       default:
         return PaymentOptions.unhandledMethod;
     }
@@ -65,6 +70,8 @@ extension PaymentOptionsExtension on PaymentOptions {
         return 'BostaCashCollection';
       case PaymentOptions.valu:
         return 'ValuPurchase';
+      case PaymentOptions.bankCard:
+        return 'MPGSCARD';
       default:
         return "";
     }
@@ -87,10 +94,10 @@ extension PaymentOptionsExtension on PaymentOptions {
         return 6;
       case PaymentOptions.valu:
         return 7;
+      case PaymentOptions.bankCard:
+        return 12;
       default:
         return 0;
     }
   }
 }
-
-List<int> availableMethods = [1, 2];

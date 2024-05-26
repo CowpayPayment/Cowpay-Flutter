@@ -1,7 +1,5 @@
-
-import 'package:dartz/dartz.dart';
-
 import '../../../../../core/core.dart';
+import '../../../../../core/packages/dartz/dartz.dart';
 import '../../../../../domain_models/domain_models.dart';
 import '../../../../../failures/failures.dart';
 import '../../payment_methods_data/payment_methods_models/get_payment_methods_request_call/get_payment_methods_request_model.dart';

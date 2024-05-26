@@ -1,10 +1,10 @@
-import 'package:dartz/dartz.dart';
-import 'package:equatable/equatable.dart';
-
+import '../../core/packages/dartz/dartz.dart';
+import '../../core/packages/equatable/equatable.dart';
 import '../../failures/failures.dart';
 
 class CardCvv extends Equatable {
   factory CardCvv(String value) => CardCvv._(_validateEmail(value));
+
   factory CardCvv.error(ValidationFailure failure) => CardCvv._(Left(failure));
 
   const CardCvv._(this.value);

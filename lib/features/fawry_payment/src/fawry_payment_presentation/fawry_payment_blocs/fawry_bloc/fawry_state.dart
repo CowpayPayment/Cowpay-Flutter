@@ -9,25 +9,26 @@ class FawryState extends Equatable {
       this.payResponseModel,
       this.failure,
       this.submitButtonIsLoading = false,
+      this.isFormValid = false,
       this.screenIsLoading = true});
 
   final num? fees;
   final FeesModel? feesModel;
   final Failure? failure;
   final bool screenIsLoading;
-  final MobileNumber? mobileNumber;
+  final String? mobileNumber;
   final bool submitButtonIsLoading;
+  final bool isFormValid;
   final PayResponseModel? payResponseModel;
-
-  bool get isFormValid => (mobileNumber?.value.isRight() ?? false);
 
   FawryState copyWith(
       {num? fees,
       FeesModel? feesModel,
       Failure? failure,
-      MobileNumber? mobileNumber,
+      String? mobileNumber,
       PayResponseModel? payResponseModel,
       bool? submitButtonIsLoading,
+      bool? isFormValid,
       bool? screenIsLoading}) {
     return FawryState(
       fees: fees ?? this.fees,
@@ -36,6 +37,7 @@ class FawryState extends Equatable {
       payResponseModel: payResponseModel ?? this.payResponseModel,
       feesModel: feesModel ?? this.feesModel,
       failure: failure ?? this.failure,
+      isFormValid: isFormValid ?? this.isFormValid,
       mobileNumber: mobileNumber ?? this.mobileNumber,
       screenIsLoading: screenIsLoading ?? this.screenIsLoading,
     );
@@ -46,6 +48,7 @@ class FawryState extends Equatable {
         failure,
         fees,
         feesModel,
+        isFormValid,
         screenIsLoading,
         mobileNumber,
         submitButtonIsLoading,

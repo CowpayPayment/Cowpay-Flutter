@@ -1,5 +1,5 @@
+import 'package:cowpay/core/packages/screen_util/screen_util.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../ui_components.dart';
 import 'app_bar_view.dart';

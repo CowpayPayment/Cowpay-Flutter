@@ -21,6 +21,7 @@ class AppAssets {
   static const String expiryDateIcon =
       'resources/images/icons/calendar_icon.svg';
   static const String cardIcon = 'resources/images/icons/credit-card_icon.svg';
+  static const String bankCardIcon = 'resources/images/icons/card_icon.png';
   static const String mobileIcon = 'resources/images/icons/mobile_icon.svg';
   static const String holderName = 'resources/images/icons/user_icon.svg';
 }

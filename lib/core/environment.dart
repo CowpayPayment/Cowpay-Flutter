@@ -1,5 +1,4 @@
-
-import '../domain_models/domain_models.dart';
+import '../domain_models/src/enums/environment_enum.dart';
 
 class ActiveEnvironment {
   static CowpayEnvironment? environment;
@@ -20,11 +19,33 @@ class ActiveEnvironment {
   static String get baseUrl {
     switch (environment) {
       case CowpayEnvironment.production:
-        return 'https://sit.cowpay.me';
+        return 'https://apigateway.cowpay.me';
       case CowpayEnvironment.staging:
         return 'https://sit.cowpay.me';
       default:
         return 'https://sit.cowpay.me';
+    }
+  }
+
+  static String get tokenUrl {
+    switch (environment) {
+      case CowpayEnvironment.production:
+        return 'https://identity.cowpay.me:8002/GetToken';
+      case CowpayEnvironment.staging:
+        return 'https://sit.cowpay.me:8000/identity/GetToken';
+      default:
+        return 'https://sit.cowpay.me:8000/identity/GetToken';
+    }
+  }
+
+  static String get redirectUrl {
+    switch (environment) {
+      case CowpayEnvironment.production:
+        return 'https://dashboard.cowpay.me:8070/';
+      case CowpayEnvironment.staging:
+        return gateWayURL;
+      default:
+        return gateWayURL;
     }
   }
 

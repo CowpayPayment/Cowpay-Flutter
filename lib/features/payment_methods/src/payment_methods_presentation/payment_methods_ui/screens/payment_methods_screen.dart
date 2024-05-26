@@ -1,15 +1,15 @@
-import 'package:cowpay/cowpay.dart';
+import 'package:cowpay/core/packages/screen_util/screen_util.dart';
+import 'package:cowpay/features/payment_methods/src/payment_methods_presentation/payment_methods_ui/payment_options_extension.dart';
+import 'package:cowpay/localization/src/localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../../core/core.dart';
+import '../../../../../../core/packages/flutter_bloc/flutter_bloc.dart';
+import '../../../../../../domain_models/domain_models.dart';
 import '../../../../../../failures/failures.dart';
-import '../../../../../../ui_components/src/ui_components/back_button_view.dart';
 import '../../../../../../ui_components/ui_components.dart';
 import '../../../../payment_methods.dart';
 import '../../payment_methods_bloc/payment_methods_bloc.dart';
-import '../payment_options_extension.dart';
 
 class PaymentMethodsScreen extends StatelessWidget {
   static const id = '/PaymentMethodsScreen';
@@ -20,7 +20,6 @@ class PaymentMethodsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BackgroundView(
         title: context.localization('paymentMethod'),
-        appBarStartActions: const BackButtonView(),
         contentWidget: BlocProvider<PaymentMethodsBloc>(
           create: (context) => di<PaymentMethodsBloc>()
             ..add(
@@ -40,12 +39,9 @@ class PaymentMethodsScreen extends StatelessWidget {
                             return DialogView(
                               dialogType: DialogType.errorDialog,
                               mainButtonText: context.localization('ok'),
-                              content: context
-                                  .localization(state.failure!.message ?? ''),
-                              // title: state.failure?.message,
+                              content: state.failure?.message,
                               onMainActionFunction: (ctx) {
                                 Navigator.pop(builderCtx);
-                                // context.read<EKYCBloc>().add(const EKYCStateReset());
                                 Navigator.of(GlobalVariables().pluginContext)
                                     .pop();
                               },
@@ -59,8 +55,7 @@ class PaymentMethodsScreen extends StatelessWidget {
                             return DialogView(
                               dialogType: DialogType.errorDialog,
                               mainButtonText: context.localization('retry'),
-                              content: context
-                                  .localization(state.failure!.message ?? ''),
+                              content: state.failure?.message,
                               onMainActionFunction: (_) {
                                 Navigator.pop(builderCtx);
                                 context.read<PaymentMethodsBloc>().add(Retry());
@@ -78,28 +73,6 @@ class PaymentMethodsScreen extends StatelessWidget {
                   }
                 },
               ),
-              // BlocListener<PaymentMethodsBloc, PaymentMethodsState>(
-              //   listenWhen: (prev, current) =>
-              //       prev.isScreenLoading != current.isScreenLoading,
-              //   listener: (context, state) {
-              //     if (state.isScreenLoading == true) {
-              //       Loader.instance.show(context);
-              //     } else {
-              //       Loader.instance.hide();
-              //       Navigator.push(
-              //         context,
-              //         MaterialPageRoute(
-              //           builder: (context) => Scaffold(
-              //             body: BackgroundView(
-              //               title: 'Another Screen',
-              //               contentWidget: Container(),
-              //             ),
-              //           ),
-              //         ),
-              //       );
-              //     }
-              //   },
-              // ),
             ],
             child: BlocBuilder<PaymentMethodsBloc, PaymentMethodsState>(
                 buildWhen: (prev, current) =>
@@ -111,8 +84,7 @@ class PaymentMethodsScreen extends StatelessWidget {
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      if (GlobalVariables().logoStringUrl != null &&
-                          (GlobalVariables().logoStringUrl ?? "").isNotEmpty)
+                      if (GlobalVariables().logoStringUrl != null)
                         _buildHeader(
                             imagePath: GlobalVariables().logoStringUrl!),
                       Expanded(
@@ -179,7 +151,7 @@ class PaymentMethodsScreen extends StatelessWidget {
                                                               selectedMethod),
                                                     );
                                               },
-                                              context: context);
+                                              context: blocContext);
                                         });
                                   },
                                 ),
@@ -202,8 +174,8 @@ class PaymentMethodsScreen extends StatelessWidget {
                                 },
                               ),
                               SizedBox(
-                                height: 0.012.sh,
-                              ),
+                                height: 0.1.sh,
+                              )
                             ],
                           ),
                         ),
@@ -218,18 +190,17 @@ class PaymentMethodsScreen extends StatelessWidget {
   void navigateToNextScreen(PaymentOptions? method, BuildContext context) {
     if (method != null) {
       if (method.screenPath != '') {
-        Navigator.of(context).pushNamed(
-          method.screenPath,
-        );
+        Navigator.of(context).pushNamed(method.screenPath, arguments: method);
       }
     }
   }
 
-  Widget _buildMethodItem(
-      {required PaymentOptions paymentOption,
-      bool? isSelected,
-      required Function(PaymentOptions) selectMethod,
-      required BuildContext context}) {
+  Widget _buildMethodItem({
+    required PaymentOptions paymentOption,
+    bool? isSelected,
+    required Function(PaymentOptions) selectMethod,
+    required BuildContext context,
+  }) {
     return InkWell(
       onTap: () {
         selectMethod(paymentOption);
@@ -260,9 +231,7 @@ class PaymentMethodsScreen extends StatelessWidget {
             ),
             Expanded(
                 child: Text(
-              context.localization(
-                paymentOption.name,
-              ),
+              context.localization(paymentOption.name),
               style: TextStyles.bodyTextStyle.copyWith(
                   color: AppColors.black,
                   fontWeight: FontWeight.w500,
@@ -326,7 +295,7 @@ class PaymentMethodsScreen extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          text ?? context.localization('noPaymentMethodsAvailable'),
+          text ?? context.localization('emptyData'),
           style: TextStyles.bodyTextStyle.copyWith(color: AppColors.black),
         ),
       ],

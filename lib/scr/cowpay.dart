@@ -1,10 +1,10 @@
-import 'package:cowpay/cowpay.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../core/core.dart';
-import '../localization/src/enum.dart';
+import '../core/packages/screen_util/screen_util.dart';
+import '../domain_models/domain_models.dart';
+import '../localization/localization.dart';
 import '../network/network.dart';
 import '../routers/routers.dart';
 import 'di/injection_container.dart';
@@ -47,6 +47,7 @@ class Cowpay extends StatefulWidget {
   final String description, merchantReferenceId;
   final num amount;
   final bool isFeesOnCustomer;
+
   //Customer Data
   final String customerEmail,
       customerFirstName,
@@ -56,6 +57,7 @@ class Cowpay extends StatefulWidget {
 
 //Environment: staging or production
   final CowpayEnvironment activeEnvironment;
+
   //LocalizationCode: ar or en
   final LocalizationCode localizationCode;
 
@@ -67,6 +69,7 @@ class Cowpay extends StatefulWidget {
 
   //onClosedByUser callback function
   final Function onClosedByUser;
+
   //UI Customizations
   final double? height;
   final Color? buttonColor, buttonTextColor, mainColor;
@@ -104,7 +107,7 @@ class _CowpayState extends State<Cowpay> {
       customerLastName: widget.customerLastName,
       customerMobile: widget.customerMobile,
       customerMerchantProfileId: widget.customerMerchantProfileId,
-      isfeesOnCustomer: widget.isFeesOnCustomer,
+      isFeesOnCustomer: widget.isFeesOnCustomer,
       logoStringUrl: widget.logoStringUrl,
     );
 
@@ -128,11 +131,12 @@ class _CowpayState extends State<Cowpay> {
             child: ScreenUtilInit(
               designSize: const Size(360, 690),
               builder: (BuildContext context, Widget? child) {
-                return WillPopScope(
-                  onWillPop: () async {
-                    var canPop =
-                        GlobalVariables().navigatorKey.currentState!.canPop();
-                    if (canPop) {
+                return PopScope(
+                  canPop:
+                      GlobalVariables().navigatorKey.currentState?.canPop() ??
+                          false,
+                  onPopInvoked: (didPop) {
+                    if (didPop) {
                       GlobalVariables()
                           .navigatorKey
                           .currentState!
@@ -140,7 +144,6 @@ class _CowpayState extends State<Cowpay> {
                     } else {
                       widget.onClosedByUser();
                     }
-                    return !canPop;
                   },
                   child: Navigator(
                     key: GlobalVariables().navigatorKey,

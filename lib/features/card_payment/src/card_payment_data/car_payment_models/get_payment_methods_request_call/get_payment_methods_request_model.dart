@@ -1,4 +1,3 @@
-
 import '../../../../../../network/network.dart';
 
 class GetPaymentMethodsRequestModel extends RequestModel {

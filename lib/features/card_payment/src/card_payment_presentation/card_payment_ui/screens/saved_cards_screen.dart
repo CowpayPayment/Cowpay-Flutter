@@ -1,14 +1,14 @@
 import 'package:cowpay/core/packages/screen_util/screen_util.dart';
-import 'package:cowpay/cowpay.dart';
+import 'package:cowpay/localization/src/localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
 
 import '../../../../../../core/core.dart';
-import '../../../../../../failures/failures.dart';
+import '../../../../../../core/packages/flutter_bloc/flutter_bloc.dart';
+import '../../../../../../core/packages/flutter_svg/flutter_svg.dart';
+import '../../../../../../domain_models/domain_models.dart';
+import '../../../../../../failures/src/error/failure.dart';
 import '../../../../../../payment_domain/payment_domain.dart';
 import '../../../../../../routers/routers.dart';
-import '../../../../../../ui_components/src/ui_components/back_button_view.dart';
 import '../../../../../../ui_components/ui_components.dart';
 import '../../card_payment_blocs/saved_cards_bloc/saved_cards_bloc.dart';
 
@@ -20,8 +20,6 @@ class SavedCardsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BackgroundView(
-        appBarStartActions:
-            BackButtonView(onTap: () => Navigator.of(context).pop()),
         title: context.localization('saveCards'),
         contentWidget: BlocProvider<SavedCardsBloc>(
           create: (context) => di<SavedCardsBloc>()..add(GetSavedCards()),
@@ -41,8 +39,7 @@ class SavedCardsScreen extends StatelessWidget {
                             return DialogView(
                               dialogType: DialogType.errorDialog,
                               mainButtonText: context.localization('exit'),
-                              content: context
-                                  .localization(state.failure!.message ?? ''),
+                              content: state.failure?.message,
                               onMainActionFunction: (ctx) {
                                 Navigator.pop(builderCtx);
                                 Navigator.of(GlobalVariables().pluginContext)
@@ -58,8 +55,7 @@ class SavedCardsScreen extends StatelessWidget {
                             return DialogView(
                               dialogType: DialogType.errorDialog,
                               mainButtonText: context.localization('retry'),
-                              content: context
-                                  .localization(state.failure!.message ?? ''),
+                              content: state.failure?.message,
                               onMainActionFunction: (_) {
                                 Navigator.pop(builderCtx);
                                 context.read<SavedCardsBloc>().add(Retry());
@@ -175,7 +171,7 @@ class SavedCardsScreen extends StatelessWidget {
                             child: BlocBuilder<SavedCardsBloc, SavedCardsState>(
                               buildWhen: (prev, current) =>
                                   prev.cardsList != current.cardsList ||
-                                  prev.choosenCard != current.choosenCard,
+                                  prev.chosenCard != current.chosenCard,
                               builder: (blocContext, state) {
                                 return ListView.builder(
                                     itemCount: state.cardsList?.length ?? 0,
@@ -185,13 +181,13 @@ class SavedCardsScreen extends StatelessWidget {
                                       if ((state.cardsList?.length ?? 0) == 0) {
                                         return _emptyWidget(
                                             text: context.localization(
-                                                'thereIsNoSavedCards'),
+                                                'noPaymentMethodsAvailable'),
                                             context: context);
                                       }
                                       return _buildCardItem(
                                           card: state.cardsList![index],
                                           isSelected: state
-                                                  .choosenCard?.tokenId ==
+                                                  .chosenCard?.tokenId ==
                                               state.cardsList?[index].tokenId,
                                           selectCard: (selectedMethod) {
                                             context.read<SavedCardsBloc>().add(
@@ -216,7 +212,7 @@ class SavedCardsScreen extends StatelessWidget {
                                     feesModel: state.feesModel!,
                                     amount: GlobalVariables().amount,
                                     isFeesOnCustomer:
-                                        GlobalVariables().isfeesOnCustomer,
+                                        GlobalVariables().isFeesOnCustomer,
                                   );
                                 } else {
                                   return const SizedBox();
@@ -228,7 +224,7 @@ class SavedCardsScreen extends StatelessWidget {
                                 title:
                                     context.localization('next').toUpperCase(),
                                 onClickFunction: (ctx) {
-                                  if (state.choosenCard != null) {
+                                  if (state.chosenCard != null) {
                                     showCvvPopup(blocContext);
                                   }
                                 },
@@ -237,7 +233,7 @@ class SavedCardsScreen extends StatelessWidget {
                             },
                           ),
                           SizedBox(
-                            height: 0.012.sh,
+                            height: 0.05.sh,
                           ),
                         ],
                       ),
@@ -249,8 +245,6 @@ class SavedCardsScreen extends StatelessWidget {
           ),
         ));
   }
-
-  void goToBackScreen(BuildContext context) {}
 
   void showCvvPopup(BuildContext context) {
     bool validCvv = false;
@@ -426,7 +420,7 @@ class SavedCardsScreen extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          text ?? context.localization('thereIsNoSavedCards'),
+          text ?? context.localization('emptyData'),
         ),
       ],
     );

@@ -1,6 +1,4 @@
-
-import 'package:dartz/dartz.dart';
-
+import '../../../../../core/packages/dartz/dartz.dart';
 import '../../../../../domain_models/domain_models.dart';
 import '../../../../../failures/failures.dart';
 import '../../payment_methods_domain/payment_methods_repositories/payment_methods_repository.dart';
@@ -14,7 +12,7 @@ class PaymentMethodsRepositoryImpl implements PaymentMethodsRepository {
   PaymentMethodsRepositoryImpl({required this.remoteDataSource});
 
   @override
-  Future<Either<Failure, /*CowpayResponseModel<*/String/*>*/>> getTokenCall(
+  Future<Either<Failure, String>> getTokenCall(
       {required GetTokenRequestModel requestModel}) async {
     try {
       final token =

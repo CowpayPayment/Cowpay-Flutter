@@ -1,6 +1,4 @@
-
-import 'package:get_it/get_it.dart';
-
+import '../../../../core/packages/get_it/get_it.dart';
 import '../fawry_payment_data/fawry_payment_datasources/fawry_payment_remote_datasource.dart';
 import '../fawry_payment_data/fawry_payment_repository/fawry_payment_repository_impl.dart';
 import '../fawry_payment_domain/fawry_payment_repositories/fawry_payment_repository.dart';

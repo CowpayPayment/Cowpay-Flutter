@@ -7,31 +7,38 @@ abstract class AddCardEvent {
 class GetFeesEvent extends AddCardEvent {}
 
 class SubmitActionTapped extends AddCardEvent {
-  SubmitActionTapped();
+  final PaymentOptions paymentOption;
+
+  SubmitActionTapped({required this.paymentOption});
 }
 
 class CardCvvChanged extends AddCardEvent {
   final String value;
+
   CardCvvChanged(this.value);
 }
 
 class CardNumberChanged extends AddCardEvent {
   final String value;
+
   CardNumberChanged(this.value);
 }
 
 class CardExpirationChanged extends AddCardEvent {
   final String value;
+
   CardExpirationChanged(this.value);
 }
 
 class CardHolderNameChanged extends AddCardEvent {
   final String value;
+
   CardHolderNameChanged(this.value);
 }
 
 class IsTokenizedChanged extends AddCardEvent {
   bool value;
+
   IsTokenizedChanged(this.value);
 }
 

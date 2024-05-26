@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 import 'ar.dart';
 import 'en.dart';
 import 'enum.dart';

@@ -1,5 +1,7 @@
 # This is a generated file; do not edit or check into version control.
-fluttertoast=/Users/osx/.pub-cache/hosted/pub.dev/fluttertoast-8.2.2/
-webview_flutter=/Users/osx/.pub-cache/hosted/pub.dev/webview_flutter-4.2.4/
-webview_flutter_android=/Users/osx/.pub-cache/hosted/pub.dev/webview_flutter_android-3.9.5/
-webview_flutter_wkwebview=/Users/osx/.pub-cache/hosted/pub.dev/webview_flutter_wkwebview-3.7.4/
+fluttertoast=/Users/osx/.pub-cache/hosted/pub.dev/fluttertoast-8.2.5/
+libphonenumber_plugin=/Users/osx/.pub-cache/hosted/pub.dev/libphonenumber_plugin-0.3.3/
+libphonenumber_web=/Users/osx/.pub-cache/hosted/pub.dev/libphonenumber_web-0.3.2/
+webview_flutter=/Users/osx/.pub-cache/hosted/pub.dev/webview_flutter-4.8.0/
+webview_flutter_android=/Users/osx/.pub-cache/hosted/pub.dev/webview_flutter_android-3.16.2/
+webview_flutter_wkwebview=/Users/osx/.pub-cache/hosted/pub.dev/webview_flutter_wkwebview-3.13.1/

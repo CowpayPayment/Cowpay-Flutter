@@ -1,5 +1,5 @@
-
-import '../domain_models.dart';
+import 'card_models/card_success_model.dart';
+import 'fawry_models/fawry_success_model.dart';
 
 class PaymentSuccessModel {
   FawrySuccessModel? fawrySuccessModel;

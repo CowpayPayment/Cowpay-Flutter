@@ -1,37 +1,55 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:cowpay/cowpay.dart';
+import 'package:cowpay/localization/src/localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:webview_flutter_android/webview_flutter_android.dart';
 import 'package:webview_flutter_wkwebview/webview_flutter_wkwebview.dart';
 
 import '../../../../../../core/core.dart';
+import '../../../../../../core/packages/flutter_bloc/flutter_bloc.dart';
+import '../../../../../../domain_models/domain_models.dart';
 import '../../../../../../payment_domain/payment_domain.dart';
 import '../../../../../../ui_components/ui_components.dart';
 import '../../../card_payment_data/car_payment_models/cowpay_js_channel_message.dart';
 import '../../card_payment_blocs/webview_bloc/payment_webview_bloc.dart';
 
-class PaymentWebViewScreen extends StatelessWidget {
+class PaymentWebViewScreenArgs {
   final PayResponseModel payResponseModel;
+  final PaymentOptions paymentOption;
+
+  const PaymentWebViewScreenArgs(
+      {required this.payResponseModel, required this.paymentOption});
+}
+
+class PaymentWebViewScreen extends StatelessWidget {
+  final PaymentWebViewScreenArgs paymentWebViewScreenArgs;
   static const id = '/PaymentWebViewScreen';
-  const PaymentWebViewScreen({super.key, required this.payResponseModel});
+
+  const PaymentWebViewScreen(
+      {super.key, required this.paymentWebViewScreenArgs});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider<PaymentWebViewBloc>(
       create: (context) => PaymentWebViewBloc(),
-      child: PaymentWebViewWidget(payResponseModel),
+      child: PaymentWebViewWidget(
+        paymentWebViewScreenArgs.payResponseModel,
+        paymentWebViewScreenArgs.paymentOption,
+      ),
     );
   }
 }
 
 class PaymentWebViewWidget extends StatefulWidget {
   final PayResponseModel payResponseModel;
-  const PaymentWebViewWidget(this.payResponseModel, {Key? key})
+  final PaymentOptions paymentOption;
+
+  const PaymentWebViewWidget(this.payResponseModel, this.paymentOption,
+      {Key? key})
       : super(key: key);
 
   @override
@@ -43,19 +61,21 @@ class _PaymentWebViewWidgetState extends State<PaymentWebViewWidget> {
   Completer? _completer;
   late Uint8List body = Uint8List(0);
   LoadRequestMethod loadRequestMethod = LoadRequestMethod.post;
+  String? url;
 
   @override
   void initState() {
-    if (widget.payResponseModel.status == RedirectStatus.redirect) {
+    if (widget.payResponseModel.statusId == PaymentStatus.redirect) {
       body = Uint8List.fromList(utf8.encode(
           'body=${jsonEncode(widget.payResponseModel.redirectParams?.body)},redirect=${widget.payResponseModel.redirectParams?.redirect}'));
-    } else if (widget.payResponseModel.status == RedirectStatus.threeDS) {
+    } else if (widget.payResponseModel.statusId == PaymentStatus.threeDS) {
       body = Uint8List.fromList(
         utf8.encode(
             'paReq=${jsonEncode(widget.payResponseModel.redirectParams?.paReq)},termURL=${widget.payResponseModel.redirectParams?.termUrl},md=${jsonEncode(widget.payResponseModel.redirectParams?.md)}'),
       );
     }
-    if (widget.payResponseModel.redirectMethod == RedirectMethod.get) {
+    if (widget.payResponseModel.redirectMethod == RedirectMethod.get ||
+        widget.paymentOption == PaymentOptions.bankCard) {
       loadRequestMethod = LoadRequestMethod.get;
     }
     super.initState();
@@ -72,6 +92,10 @@ class _PaymentWebViewWidgetState extends State<PaymentWebViewWidget> {
     final WebViewController controller =
         WebViewController.fromPlatformCreationParams(params);
 
+    String? url = widget.paymentOption == PaymentOptions.bankCard
+        ? "${ActiveEnvironment.redirectUrl}/customer-paymentlink/otp-redirect?token=${widget.payResponseModel.returnUrl3ds}"
+        : widget.payResponseModel.redirectUrl;
+
     controller
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..setBackgroundColor(const Color(0x00000000))
@@ -87,9 +111,20 @@ class _PaymentWebViewWidgetState extends State<PaymentWebViewWidget> {
             context.read<PaymentWebViewBloc>().add(StartLoadingChanged());
             debugPrint('Page started loading: $url');
           },
-          onPageFinished: (String url) {
+          onPageFinished: (String url) async {
             context.read<PaymentWebViewBloc>().add(StopLoadingChanged());
+
             debugPrint('Page finished loading: $url');
+            if (true) {
+              this.url = url;
+              var html = widget.payResponseModel.html;
+
+              var xx = {"html": html};
+
+              var js = json.encode(xx);
+              await _controller.runJavaScript(
+                  'setTimeout(()=>{ window.postMessage($js); },3000)');
+            }
           },
           onWebResourceError: (WebResourceError error) {
             debugPrint('Page resource error: code: ${error.errorCode} '
@@ -106,7 +141,7 @@ class _PaymentWebViewWidgetState extends State<PaymentWebViewWidget> {
 
         CowpayJSChannelMessage model =
             CowpayJSChannelMessage.fromMap(jsonDecode(message.message));
-        if (model.paymentStatus == PaymentStatus.success) {
+        if (model.paymentStatus == PaymentStatus.paid) {
           _successDialog(context, model);
         } else {
           _errorDialog(context, context.localization('paymentFailed'));
@@ -115,12 +150,13 @@ class _PaymentWebViewWidgetState extends State<PaymentWebViewWidget> {
         debugPrint("message:${message.toString()}");
       })
       ..loadRequest(
-        Uri.parse('${widget.payResponseModel.redirectUrl}'),
+        // Uri.parse('https://jeeeko.github.io/js-channel/' ?? ''),
+        Uri.parse(url ?? ''),
         method: loadRequestMethod,
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
         },
-        body: body,
+        body: widget.paymentOption == PaymentOptions.creditCard ? body : null,
       );
     if (controller.platform is AndroidWebViewController) {
       AndroidWebViewController.enableDebugging(true);
@@ -149,8 +185,8 @@ class _PaymentWebViewWidgetState extends State<PaymentWebViewWidget> {
           },
         )
       ],
-      child: WillPopScope(
-        onWillPop: () {
+      child: PopScope(
+        onPopInvoked: (didPop) {
           DialogView.showBottomSheet(
               context: context,
               builder: (builderCtx) {
@@ -168,7 +204,6 @@ class _PaymentWebViewWidgetState extends State<PaymentWebViewWidget> {
                   },
                 );
               });
-          return Future.value(false);
         },
         child: Scaffold(
           backgroundColor: Colors.white,

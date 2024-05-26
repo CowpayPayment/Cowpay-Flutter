@@ -20,6 +20,12 @@ class MobileNumberChanged extends FawryEvent {
   MobileNumberChanged(this.value);
 }
 
+class PhoneValidChanged extends FawryEvent {
+  final bool value;
+
+  PhoneValidChanged(this.value);
+}
+
 class SubmitActionTapped extends FawryEvent {
   SubmitActionTapped();
 }

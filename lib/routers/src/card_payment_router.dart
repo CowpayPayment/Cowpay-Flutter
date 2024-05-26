@@ -1,7 +1,7 @@
+import 'package:cowpay/domain_models/domain_models.dart';
 import 'package:flutter/material.dart';
 
 import '../../features/card_payment/card_payment.dart';
-import '../../payment_domain/payment_domain.dart';
 
 class CardPaymentRouter {
   CardPaymentRouter._();
@@ -9,15 +9,18 @@ class CardPaymentRouter {
   static Route? onGenerateRoute(RouteSettings routeSettings) {
     switch (routeSettings.name) {
       case AddCardScreen.id:
-        return MaterialPageRoute(builder: (_) => const AddCardScreen());
+        return MaterialPageRoute(
+            builder: (_) => AddCardScreen(
+                  paymentOption: routeSettings.arguments as PaymentOptions,
+                ));
       case PaymentWebViewScreen.id:
-        final PayResponseModel payResponseModel =
+        final PaymentWebViewScreenArgs paymentWebViewScreenArgs =
             routeSettings.arguments == null
                 ? throw 'Need PayResponseModel'
-                : (routeSettings.arguments! as PayResponseModel);
+                : (routeSettings.arguments! as PaymentWebViewScreenArgs);
         return MaterialPageRoute(
             builder: (_) => PaymentWebViewScreen(
-                  payResponseModel: payResponseModel,
+                  paymentWebViewScreenArgs: paymentWebViewScreenArgs,
                 ));
       case SavedCardsScreen.id:
         return MaterialPageRoute(builder: (_) => const SavedCardsScreen());

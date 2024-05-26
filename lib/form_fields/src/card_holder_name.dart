@@ -1,13 +1,11 @@
-
-
-import 'package:dartz/dartz.dart';
-import 'package:equatable/equatable.dart';
-
+import '../../core/packages/dartz/dartz.dart';
+import '../../core/packages/equatable/equatable.dart';
 import '../../failures/failures.dart';
 
 class CardHolderName extends Equatable {
   factory CardHolderName(String value) =>
       CardHolderName._(_validateEmail(value));
+
   factory CardHolderName.error(ValidationFailure failure) =>
       CardHolderName._(Left(failure));
 

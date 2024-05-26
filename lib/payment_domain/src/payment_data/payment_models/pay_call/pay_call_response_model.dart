@@ -1,5 +1,6 @@
 class PayResponseModel {
   String? recurringToken;
+  String? html;
   String? tokenId;
   String? redirectUrl;
   RedirectParams? redirectParams;
@@ -16,7 +17,8 @@ class PayResponseModel {
   num? vatAmount;
   RedirectStatus? status;
   String? paymentMethod;
-  int? statusId;
+  PaymentStatus? statusId;
+  String? returnUrl3ds;
   String? reason;
 
   PayResponseModel(
@@ -38,10 +40,13 @@ class PayResponseModel {
       this.status,
       this.paymentMethod,
       this.statusId,
+      this.returnUrl3ds,
+      this.html,
       this.reason});
 
   PayResponseModel.fromJson(Map<String, dynamic> json) {
     recurringToken = json['recurringToken'];
+    html = json['html'];
     tokenId = json['tokenId'];
     redirectUrl = json['redirectUrl'];
     redirectParams = json['redirectParams'] != null
@@ -60,7 +65,8 @@ class PayResponseModel {
     feesAmount = json['feesAmount'];
     vatAmount = json['vatAmount'];
     paymentMethod = json['paymentMethod'];
-    statusId = json['statusId'];
+    returnUrl3ds = json['returnUrl3DS'];
+    statusId = PaymentStatusExtension.parse(json['statusId']);
     reason = json['reason'];
   }
 
@@ -168,5 +174,29 @@ extension RedirectMethodExtension on RedirectMethod {
         return RedirectMethod.get;
     }
     return null;
+  }
+}
+
+enum PaymentStatus {
+  threeDS,
+  redirect,
+  paid,
+  failed,
+}
+
+extension PaymentStatusExtension on PaymentStatus {
+  static PaymentStatus parse(int? status) {
+    switch (status) {
+      case 2:
+        return PaymentStatus.paid;
+      case 5:
+        return PaymentStatus.failed;
+      case 8:
+        return PaymentStatus.threeDS;
+      case 9:
+        return PaymentStatus.redirect;
+      default:
+        return PaymentStatus.failed;
+    }
   }
 }

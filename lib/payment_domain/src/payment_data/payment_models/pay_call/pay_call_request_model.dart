@@ -1,4 +1,3 @@
-
 import '../../../../../domain_models/domain_models.dart';
 import '../../../../../failures/failures.dart';
 import '../../../../../network/network.dart';
@@ -13,7 +12,7 @@ class PayRequestModel extends RequestModel {
     required this.signature,
     required this.customerMobile,
     required this.customerEmail,
-    required this.isfeesOnCustomer,
+    required this.isFeesOnCustomer,
     required this.description,
     required this.customerFirstName,
     required this.customerLastName,
@@ -29,7 +28,7 @@ class PayRequestModel extends RequestModel {
   final String signature;
   final String customerMobile;
   final String customerEmail;
-  final bool isfeesOnCustomer;
+  final bool isFeesOnCustomer;
   final String description;
   final String customerFirstName;
   final String customerLastName;
@@ -46,7 +45,7 @@ class PayRequestModel extends RequestModel {
       "signature": signature,
       "customerMobile": customerMobile,
       "customerEmail": customerEmail,
-      "isfeesOnCustomer": isfeesOnCustomer,
+      "isfeesOnCustomer": isFeesOnCustomer,
       "description": description,
       "customerFirstName": customerFirstName,
       "customerLastName": customerLastName,
@@ -58,12 +57,17 @@ class PayRequestModel extends RequestModel {
       "customerIP": "123.123.123.123",
       "channelType": 1,
     };
-    if (paymentOptions == PaymentOptions.creditCard && cardData != null) {
+    if ((paymentOptions == PaymentOptions.creditCard ||
+            paymentOptions == PaymentOptions.bankCard) &&
+        cardData != null) {
       var parts = cardData!.cardExpiry.value
           .fold((l) => throw ValidationException(l.message), (r) => r)
           .split('/');
       String cardExpMonth = parts[0];
-      String cardExpYear = "20${parts[1]}";
+      String cardExpYear = paymentOptions == PaymentOptions.bankCard
+          ? parts[1]
+          : "20${parts[1]}";
+
       map.addAll({
         "cardNumber": cardData!.cardNumber.value.fold(
             (l) => throw ValidationException(l.message),
@@ -97,7 +101,7 @@ class PayRequestModel extends RequestModel {
         signature,
         customerMobile,
         customerEmail,
-        isfeesOnCustomer,
+        isFeesOnCustomer,
         description,
         customerFirstName,
         customerLastName,

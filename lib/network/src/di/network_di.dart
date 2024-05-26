@@ -1,6 +1,5 @@
-import 'package:get_it/get_it.dart';
-
-import '../network.dart';
+import '../../../core/packages/get_it/get_it.dart';
+import '../../network.dart';
 
 final di = GetIt.instance;
 
@@ -11,9 +10,7 @@ class NetworkDI {
 
   void call() {
     if (!di.isRegistered<Network>()) {
-      di.registerLazySingleton<Network>(() => NetworkUtilImpl())
-          // ..registerLazySingleton(() => NetworkService(di()))
-          ;
+      di.registerLazySingleton<Network>(() => NetworkUtilImpl());
     }
   }
 }

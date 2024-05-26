@@ -1,5 +1,4 @@
-
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 
 import '../../../../../../core/core.dart';
 import '../../../../../../core/packages/dartz/dartz.dart';
@@ -11,6 +10,7 @@ import '../../../../../../payment_domain/payment_domain.dart';
 import '../../../card_payment_domain/card_payment_usecases/get_user_cards_usecase.dart';
 
 part 'saved_cards_event.dart';
+
 part 'saved_cards_state.dart';
 
 class SavedCardsBloc extends Bloc<SavedCardsEvent, SavedCardsState> {
@@ -133,11 +133,11 @@ class SavedCardsBloc extends Bloc<SavedCardsEvent, SavedCardsState> {
         description: GlobalVariables().description,
         customerFirstName: GlobalVariables().customerFirstName,
         customerLastName: GlobalVariables().customerLastName,
-        isfeesOnCustomer: GlobalVariables().isfeesOnCustomer,
+        isFeesOnCustomer: GlobalVariables().isFeesOnCustomer,
         tokenizedCard: TokenizedCard(
             returnUrl3DS:
                 "${ActiveEnvironment.baseUrl}:8070/customer-paymentlink/otp-redirect",
-            tokenId: state.choosenCard?.tokenId ?? '',
+            tokenId: state.chosenCard?.tokenId ?? '',
             cardCvv: state.cvvNumber ?? ''),
       ),
     );
@@ -149,7 +149,7 @@ class SavedCardsBloc extends Bloc<SavedCardsEvent, SavedCardsState> {
   }
 
   Future<void> _pickCard(Emitter emitter, TokenizedCardDetails card) async {
-    emitter(state.copyWith(choosenCard: card));
+    emitter(state.copyWith(chosenCard: card));
   }
 
   Future<void> _cvvChanged(Emitter emitter, String cvv) async {

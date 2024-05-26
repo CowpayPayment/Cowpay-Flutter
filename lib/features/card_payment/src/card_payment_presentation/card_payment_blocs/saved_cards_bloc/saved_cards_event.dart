@@ -22,21 +22,25 @@ class CardPickedEvent extends SavedCardsEvent {
 
 class CardCvvChanged extends SavedCardsEvent {
   final String value;
+
   CardCvvChanged(this.value);
 }
 
 class CardNumberChanged extends SavedCardsEvent {
   final String value;
+
   CardNumberChanged(this.value);
 }
 
 class CardExpirationChanged extends SavedCardsEvent {
   final String value;
+
   CardExpirationChanged(this.value);
 }
 
 class CardHolderNameChanged extends SavedCardsEvent {
   final String value;
+
   CardHolderNameChanged(this.value);
 }
 

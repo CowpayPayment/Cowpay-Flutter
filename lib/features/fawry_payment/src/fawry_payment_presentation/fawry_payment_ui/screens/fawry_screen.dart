@@ -1,15 +1,16 @@
-import 'package:cowpay/cowpay.dart';
+import 'package:cowpay/core/packages/screen_util/screen_util.dart';
+import 'package:cowpay/localization/src/localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-
 import '../../../../../../core/core.dart';
+import '../../../../../../core/packages/flutter_bloc/flutter_bloc.dart';
+import '../../../../../../core/packages/flutter_toast/flutter_toast.dart';
+import '../../../../../../domain_models/domain_models.dart';
 import '../../../../../../failures/failures.dart';
 import '../../../../../../ui_components/src/ui_components/back_button_view.dart';
 import '../../../../../../ui_components/ui_components.dart';
 import '../../../../fawry_payment.dart';
+
 import '../../fawry_payment_blocs/fawry_bloc/fawry_bloc.dart';
 import '../widgets/fawry_widget.dart';
 
@@ -20,8 +21,7 @@ class FawryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BackgroundView(
-        appBarStartActions:
-            BackButtonView(onTap: () => Navigator.of(context).pop()),
+        appBarStartActions: const BackButtonView(),
         title: context.localization('paymentDetails'),
         contentWidget: BlocProvider<FawryBloc>(
           create: (context) => di<FawryBloc>()
@@ -41,8 +41,7 @@ class FawryScreen extends StatelessWidget {
                             return DialogView(
                               dialogType: DialogType.errorDialog,
                               mainButtonText: context.localization('ok'),
-                              content: context
-                                  .localization(state.failure!.message ?? ''),
+                              content: state.failure?.message,
                               onMainActionFunction: (ctx) {
                                 Navigator.pop(builderCtx);
                                 Navigator.of(GlobalVariables().pluginContext)
@@ -59,8 +58,7 @@ class FawryScreen extends StatelessWidget {
                             return DialogView(
                               dialogType: DialogType.errorDialog,
                               mainButtonText: context.localization('close'),
-                              content: context
-                                  .localization(state.failure!.message ?? ''),
+                              content: state.failure?.message,
                               onMainActionFunction: (_) {
                                 Navigator.pop(builderCtx);
                                 Navigator.of(GlobalVariables().pluginContext)
@@ -80,8 +78,7 @@ class FawryScreen extends StatelessWidget {
                             return DialogView(
                               dialogType: DialogType.errorDialog,
                               mainButtonText: context.localization('retry'),
-                              content: context
-                                  .localization(state.failure!.message ?? ''),
+                              content: state.failure?.message,
                               onMainActionFunction: (_) {
                                 Navigator.pop(builderCtx);
                                 context.read<FawryBloc>().add(Retry());
@@ -117,10 +114,7 @@ class FawryScreen extends StatelessWidget {
                   if (state.screenIsLoading == true) {
                     return const Center(child: LoadingView());
                   }
-                  if (state.failure == null) {
-                    return const FawryWidget();
-                  }
-                  return SizedBox();
+                  return const FawryWidget();
                 }),
           ),
         ));
@@ -146,7 +140,8 @@ class FawryScreen extends StatelessWidget {
                   fawryCode,
                   style: const TextStyle(
                       color: AppColors.primary, fontWeight: FontWeight.w700),
-                  textScaleFactor: 2.3,
+                  // textScaleFactor: 2.3,
+                  textScaler: const TextScaler.linear(1.5),
                 ),
               ),
               IconButton(
@@ -167,13 +162,12 @@ class FawryScreen extends StatelessWidget {
           ),
           SizedBox(
             width: 0.7.sw,
-            child: Text(
-              context.localization('fawryCodeMessage'),
-              textAlign: TextAlign.center,
-              style: const TextStyle(
-                  color: AppColors.black, fontWeight: FontWeight.w700),
-              textScaleFactor: 1.5,
-            ),
+            child: Text(context.localization('fawryCodeMessage'),
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                    color: AppColors.black, fontWeight: FontWeight.w700),
+                // textScaleFactor: 1.5,
+                textScaler: const TextScaler.linear(1.5)),
           ),
           SizedBox(
             height: 0.07.sh,
@@ -184,7 +178,8 @@ class FawryScreen extends StatelessWidget {
             onClickFunction: (context) {
               Navigator.of(GlobalVariables().pluginContext).pop();
               GlobalVariables().onSuccess(PaymentSuccessModel(
-                  paymentMethodName: PaymentOptions.fawryPay.name));
+                  paymentMethodName:
+                      context.localization(PaymentOptions.fawryPay.name)));
             },
             mainContext: context,
           )

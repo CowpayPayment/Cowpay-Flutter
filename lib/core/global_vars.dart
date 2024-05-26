@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../domain_models/domain_models.dart';
+import '../domain_models/src/error_model.dart';
+import '../domain_models/src/success_model.dart';
 
 class GlobalVariables {
   static final GlobalVariables _instance = GlobalVariables.internal();
@@ -15,7 +16,7 @@ class GlobalVariables {
   late Function(CowpayErrorModel error) onError;
   late Function onClosedByUser;
   late num amount;
-  late bool isfeesOnCustomer;
+  late bool isFeesOnCustomer;
   late String merchantCode, merchantHashCode;
   late String description, merchantReferenceId;
   late String merchantMobile;
@@ -42,7 +43,7 @@ class GlobalVariables {
     required String customerMobile,
     required String customerMerchantProfileId,
     required num amount,
-    required bool isfeesOnCustomer,
+    required bool isFeesOnCustomer,
     String? logoStringUrl,
   }) {
     this.onSuccess = onSuccess;
@@ -60,7 +61,7 @@ class GlobalVariables {
     this.customerMobile = customerMobile;
     this.customerMerchantProfileId = customerMerchantProfileId;
     this.amount = amount;
-    this.isfeesOnCustomer = isfeesOnCustomer;
+    this.isFeesOnCustomer = isFeesOnCustomer;
     this.logoStringUrl = logoStringUrl;
   }
 }

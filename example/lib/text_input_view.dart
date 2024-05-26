@@ -1,14 +1,10 @@
-import 'package:cowpay/core/packages/screen_util/screen_util.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
-import '../../../core/packages/flutter_svg/flutter_svg.dart';
-import '../../ui_components.dart';
+import 'app_decorations.dart';
 
 class AppTextField extends StatelessWidget {
   const AppTextField(
       {Key? key,
-      this.formatters,
       this.controller,
       this.hintKey,
       this.labelKey,
@@ -30,11 +26,11 @@ class AppTextField extends StatelessWidget {
       this.height,
       this.cornerRadius = 24,
       this.textStyle,
-      this.focusedBorderColor = AppColors.secondary,
+      this.focusedBorderColor = Colors.grey,
       this.focusedBorderThickness,
-      this.enabledBorderColor = AppColors.secondary,
+      this.enabledBorderColor = Colors.grey,
       this.enabledBorderThickness,
-      this.errorBorderColor = AppColors.errorColor,
+      this.errorBorderColor = Colors.red,
       this.errorBorderThickness,
       this.obscureText = false,
       this.focusNode,
@@ -73,7 +69,6 @@ class AppTextField extends StatelessWidget {
   final int? maxLength;
   final bool obscureText;
   final double? height;
-  final List<TextInputFormatter>? formatters;
 
   @override
   Widget build(BuildContext context) {
@@ -84,7 +79,6 @@ class AppTextField extends StatelessWidget {
         child: Column(
           children: [
             TextFormField(
-              inputFormatters: formatters,
               focusNode: focusNode,
               obscureText: obscureText,
               maxLength: maxLength,
@@ -97,14 +91,14 @@ class AppTextField extends StatelessWidget {
               initialValue: initialValue,
               onChanged: onChanged,
               autovalidateMode: AutovalidateMode.onUserInteraction,
-              style: textStyle ??
-                  (enabled
-                      ? TextStyles.appTextFieldStyle
-                      : TextStyles.appTextFieldStyle
-                          .copyWith(color: AppColors.hintGrey)),
+              style: const TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.w500,
+                fontSize: 13.0,
+              ),
               decoration: AppDecorations.inputTextDecoration(
                 prefixIcon: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 7.sp),
+                  padding: const EdgeInsets.symmetric(horizontal: 7),
                   child: prefixIcon,
                 ),
                 suffixIcon: suffixIcon,
@@ -113,27 +107,26 @@ class AppTextField extends StatelessWidget {
                 label: labelKey,
                 isDense: isDense,
                 hintTextStyle: hintTextStyle ??
-                    TextStyle(
-                      fontFamily: FontFamily().normalFont,
-                      color: AppColors.primary.withOpacity(0.5),
-                      fontWeight: FontWeight.w400,
-                      fontSize: 12.sp,
+                    const TextStyle(
+                      color: Colors.grey,
+                      fontWeight: FontWeight.w500,
+                      fontSize: 13.0,
                     ),
                 labelTextStyle: labelTextStyle ??
-                    TextStyle(
-                      fontFamily: FontFamily().normalFont,
-                      color: AppColors.primary.withOpacity(0.5),
-                      fontSize: 12.sp,
+                    const TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.w500,
+                      fontSize: 13.0,
                     ),
                 cornerRadius: cornerRadius,
-                focusedBorderColor: AppColors.primary,
+                focusedBorderColor: Colors.grey,
                 focusedBorderThickness: focusedBorderThickness,
-                enabledBorderColor: AppColors.primary.withOpacity(0.3),
+                enabledBorderColor: Colors.grey,
                 enabledBorderThickness: enabledBorderThickness,
-                errorBorderColor: AppColors.errorColor,
-                errorBorderThickness: errorBorderThickness,
+                erroBorderColor: Colors.red,
+                erroBorderThickness: errorBorderThickness,
               ),
-              cursorColor: AppColors.primary,
+              cursorColor: Colors.black,
               textInputAction: textInputAction ?? TextInputAction.next,
               onFieldSubmitted: onFieldSubmitted,
             ),
@@ -156,15 +149,12 @@ class AppTextField extends StatelessWidget {
     Function? onPressSuffixIcon,
     Function()? onPress,
     TextEditingController? controller,
-    List<TextInputFormatter>? formatters,
   }) {
     return SizedBox(
       child: InkWell(
         onTap: onPress,
         child: AppTextField(
-          margin: EdgeInsetsDirectional.symmetric(
-              horizontal: 10.sp, vertical: 5.sp),
-          formatters: formatters,
+          margin: const EdgeInsetsDirectional.symmetric(horizontal: 10, vertical: 5),
           initialValue: value,
           maxLines: 1,
           maxLength: maxLength,
@@ -176,48 +166,14 @@ class AppTextField extends StatelessWidget {
           hintKey: fieldData.hint,
           fillColor: Colors.transparent,
           // focusNode: fieldData.focusNode,
-          labelTextStyle: TextStyle(
-            fontFamily: FontFamily().normalFont,
-            color: AppColors.primary.withOpacity(0.5),
-            fontSize: 12.sp,
+          labelTextStyle: const TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.w500,
+            fontSize: 13.0,
           ),
           validator: validator,
           textInputAction: textInputAction ?? TextInputAction.next,
           textInputType: textInputType ?? TextInputType.text,
-          prefixIcon: Padding(
-            padding: EdgeInsetsDirectional.all(5.sp),
-            child: SizedBox(
-                width: 20.sp,
-                height: 20.sp,
-                child: SvgPicture.asset(
-                  fieldData.prefixIconPath,
-                  package: 'cowpay',
-                )),
-          ),
-
-          suffixIcon:
-              (fieldData.suffixIconPath != null && onPressSuffixIcon != null)
-                  ? InkWell(
-                      onTap: () {
-                        onPressSuffixIcon();
-                      },
-                      child: Padding(
-                        padding: EdgeInsetsDirectional.only(
-                            start: 10.sp,
-                            end: 15.sp,
-                            top: 18.sp,
-                            bottom: 10.sp),
-                        child: SizedBox(
-                          width: 20.sp,
-                          height: 20.sp,
-                          child: SvgPicture.asset(
-                            fieldData.suffixIconPath!,
-                            package: 'cowpay',
-                          ),
-                        ),
-                      ),
-                    )
-                  : null,
         ),
       ),
     );
@@ -226,13 +182,13 @@ class AppTextField extends StatelessWidget {
 
 class FieldData {
   final String label;
-  final String prefixIconPath;
+  final String? prefixIconPath;
   final String? suffixIconPath;
   final String? hint;
 
   const FieldData({
     required this.label,
-    required this.prefixIconPath,
+    this.prefixIconPath,
     this.suffixIconPath,
     this.hint,
   });

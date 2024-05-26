@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../../features/payment_methods/payment_methods.dart';
 import '../routers.dart';
 
-
 class AppRouter {
   AppRouter._();
 
