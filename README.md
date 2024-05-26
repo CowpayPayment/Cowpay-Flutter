@@ -13,10 +13,8 @@ _Minimum Flutter version 2.5.0_
 Add the following line to pubspec.yaml file.
 ```
 dependencies:
-  cowpay:
-    git:
-      url: https://github.com/LuminSoft/cowpay-flutter-plugin.git
-      ref: latest release version
+  cowpay: ^1.0.0
+  
 ```
 
 
@@ -38,7 +36,7 @@ return Cowpay(
       customerMobile: 'customerMobile',
       customerLastName: 'customerName',
       customerFirstName: 'customerName',
-      isfeesOnCustomer: true,
+      isFeesOnCustomer: true,
       logoStringUrl:'logoStringUrl',
       merchantMobile: 'merchantMobile',
       description: 'description',
@@ -62,26 +60,26 @@ return Cowpay(
 
 ## VALUES DESCRIPTION
 
-|     Key       | values |
-| ------------- | ------------- |
-| localizationCode   | Select your language code enum value LocalizationCode.en for English, and LocalizationCode.ar if Arabic.   |
-| amount   | two decimal value like "15.60", sent in case of partial capture   |
-| customerEmail   | customer valid email   |
-| customerMobile   | internationally formatted customer mobile   |
-| customerLastName   | customer last name being charged   |
-| customerFirstName   | customer first name being charged   |
-| isfeesOnCustomer   | is fees on customer or merchant   |
-| logoStringUrl   | merchant logo url   |
-| merchantMobile   | merchant mobile   |
-| description   | charge request description that reserve the payment name   |
-| customerMerchantProfileId   | ID of the customer being charged on your system   |
-| merchantReferenceId   | Unique alphanumeric value required as identifier for the charge request   |
-| activeEnvironment   | CowpayEnvironment.staging || CowpayEnvironment.production   |
-| merchantHashCode   | Hash code that is presented in your panel.   |
-| merchantCode   | Your code that is presented in your panel.   |
-| onSuccess   | Call back function if transaction succeeds.   |
-| onError   | Call back function when an error occurres.   |
-| onClosedByUser   | Call back function if customer goes back before making a transaction.   |
+| Key                       | values                                                                                                   |
+|---------------------------|----------------------------------------------------------------------------------------------------------|
+| localizationCode          | Select your language code enum value LocalizationCode.en for English, and LocalizationCode.ar if Arabic. |
+| amount                    | two decimal value like "15.60", sent in case of partial capture                                          |
+| customerEmail             | customer valid email                                                                                     |
+| customerMobile            | internationally formatted customer mobile                                                                |
+| customerLastName          | customer last name being charged                                                                         |
+| customerFirstName         | customer first name being charged                                                                        |
+| isFeesOnCustomer          | is fees on customer or merchant                                                                          |
+| logoStringUrl             | merchant logo url                                                                                        |
+| merchantMobile            | merchant mobile                                                                                          |
+| description               | charge request description that reserve the payment name                                                 |
+| customerMerchantProfileId | ID of the customer being charged on your system                                                          |
+| merchantReferenceId       | Unique alphanumeric value required as identifier for the charge request                                  |
+| activeEnvironment         | CowpayEnvironment.staging                                                                                || CowpayEnvironment.production   |
+| merchantHashCode          | Hash code that is presented in your panel.                                                               |
+| merchantCode              | Your code that is presented in your panel.                                                               |
+| onSuccess                 | Call back function if transaction succeeds.                                                              |
+| onError                   | Call back function when an error occurred.                                                               |
+| onClosedByUser            | Call back function if customer goes back before making a transaction.                                    |
 
 
 
