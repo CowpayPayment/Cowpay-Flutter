@@ -13,8 +13,10 @@ _Minimum Flutter version 2.5.0_
 Add the following line to pubspec.yaml file.
 ```
 dependencies:
-  cowpay: ^1.0.0
-  
+  cowpay:
+    git:
+      url: https://github.com/LuminSoft/cowpay-flutter-plugin.git
+      ref: latest release version
 ```
 
 
