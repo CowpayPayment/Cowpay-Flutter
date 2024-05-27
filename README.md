@@ -15,7 +15,7 @@ Add the following line to pubspec.yaml file.
 dependencies:
   cowpay:
     git:
-      url: https://github.com/LuminSoft/cowpay-flutter-plugin.git
+      url: https://github.com/CowpayPayment/Cowpay-Flutter.git
       ref: latest release version
 ```
 
